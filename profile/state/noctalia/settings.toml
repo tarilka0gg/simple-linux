@@ -1,0 +1,136 @@
+[bar]
+order = [ "main" ]
+
+    [bar.main]
+    center = [ "group:g4" ]
+    end = [ "group:g2", "group:g1", "volume" ]
+    start = [ "group:g3" ]
+    thickness = 32
+    widget_spacing = 8
+
+        [[bar.main.capsule_group]]
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "power_profile", "network", "bluetooth", "battery", "session" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.main.capsule_group]]
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "tray", "clipboard" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.main.capsule_group]]
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "brightness", "launcher", "wallpaper" ]
+        opacity = 1.0
+        padding = 6.0
+
+        [[bar.main.capsule_group]]
+        fill = "surface_variant"
+        id = "g4"
+        members = [ "media", "spacer_3", "clock", "date", "workspaces", "spacer_2" ]
+        opacity = 1.0
+        padding = 6.0
+
+[control_center]
+hidden_tabs = [ "notifications" ]
+
+[desktop_widgets]
+enabled = true
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[dock]
+cross_axis_padding = 6
+enabled = true
+icon_size = 32
+item_spacing = 4
+launcher_position = "end"
+main_axis_padding = 12
+margin_edge = 4
+pinned = [ "com.mitchellh.ghostty", "thunar", "zen-zen-bin" ]
+show_dots = true
+
+[hot_corners.top_right]
+action = "control_center"
+
+[idle]
+pre_action_fade_seconds = 0
+
+[lockscreen]
+fingerprint = false
+
+[nightlight]
+enabled = true
+
+[osd.kinds]
+keyboard_layout = false
+nightlight = false
+
+[shell]
+app_icon_color = "surface"
+app_icon_colorize = true
+clipboard_history_max_entries = 500
+niri_overview_type_to_launch_enabled = true
+screen_time_enabled = true
+settings_show_advanced = true
+ui_scale = 0.95000000670552254
+
+    [shell.animation]
+    speed = 1.5000000223517418
+
+    [shell.launcher]
+    compact = true
+
+    [shell.panel]
+    clipboard_placement = "floating"
+    control_center_placement = "floating"
+    floating_offset = 6
+    launcher_placement = "floating"
+    session_placement = "floating"
+    session_position = "center"
+    wallpaper_placement = "floating"
+    wallpaper_position = "center"
+
+[theme]
+builtin = "Noctalia"
+community_palette = "Futuro Darko"
+mode = "light"
+source = "community"
+wallpaper_scheme = "faithful"
+
+    [theme.templates]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "kcolorscheme", "qt" ]
+    community_ids = [ "neovim", "fuzzel", "telegram", "yazi" ]
+
+[widget.battery]
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+[widget.media]
+hide_when_no_media = true
+
+[widget.network]
+show_label = false
+
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+type = "spacer"
+
+[widget.volume]
+show_label = false
