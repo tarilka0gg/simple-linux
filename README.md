@@ -15,12 +15,28 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | File | Size | What it is |
 |---|---|---|
 | `simple-linux-minimal.iso` | 1.3 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 1.8 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-gui.iso` | 1.7 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks (also already inside both ISOs) |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
+| `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
+| `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.1.2**. (0.1.0 did not start on the first laptop it was tried on; 0.1.1 fixed the boot; 0.1.2 fixes the installer itself, see below.) There is no Secure Boot support and nothing is signed.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.0**. (0.1.0 did not start on the first laptop it was tried on; 0.1.1 fixed the boot; 0.1.2 fixed the installer; 0.2.0 is below.)
+
+### Verifying the download
+
+The checksums are signed with an ssh key; its public half is in `signing/allowed_signers`. With the files, `SHA256SUMS` and `SHA256SUMS.sig` in one directory:
+
+```
+sh signing/verify.sh .
+```
+
+This checks the signature and then the files. The signing key (`SHA256:mvyK27nZZuGrO5vkK+yW+dVJSclojy3sPV1QZjZaZiw`) is the author's; if a release ever fails this check, do not use it.
+
+### Secure Boot
+
+Both ISOs are Secure Boot capable but **not Microsoft-signed**: a stock firmware refuses them ("Access Denied"). Either turn Secure Boot off, or enrol `secureboot/simple-linux-db.cer` in the firmware's `db` (setup menu → Secure Boot → Key Management). Limine is signed with that key and pins its config, the kernel and the initramfs by hash. Checked under OVMF: boots with the key enrolled, refused with Microsoft's keys. The *installed* system is not set up for Secure Boot.
 
 ## Try it
 
@@ -56,6 +72,15 @@ console setting that hid those lines on laptops with a phantom serial port; 0.1.
 microcode early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
+## What 0.2.0 changed
+
+- **One install path.** The text and graphical installers run the same phase pipeline as `--headless`, and a failed install can be **resumed** (`r` in the text installer, a button in the GUI, `--resume`): done steps are skipped, the rest continue. The VM test of this found that the base-system step could not run twice (it now remembers an unpacked stage and re-fetches the overlay); fixed.
+- **Graphics.** Every graphics adapter is detected, `VIDEO_CARDS` covers all of them (hybrid laptops used to get only the discrete GPU's driver; the values are now Gentoo's: `amdgpu radeonsi`, `intel`, `nvidia`, `virgl` in a VM), and the compositor renders on the discrete GPU unless asked otherwise (`GENTOO_INSTALLER_RENDER=integrated`): niri's `render-drm-device`, `WLR_DRM_DEVICES`/`AQ_DRM_DEVICES` for the others, and Noctalia's shared GL context is switched off for the proprietary NVIDIA driver.
+- **Language and time zone** follow the keyboard layout (a `ua` keyboard gives `uk_UA` + `en_US` and `Europe/Kyiv`); only unambiguous countries get a zone.
+- **Kernels.** The installer picks from a real per-hardware store (`simple-linux-kernel-store.tar`); a full install from the minimal image used `generic-x86-64-v3-none-desktop` from it.
+- **Images** are about 8 % smaller (squashfs zstd level 19, 1 MiB blocks); both were booted as a USB stick on BIOS, UEFI and Secure Boot. The GUI image without 3D falls back to a cage-hosted graphical installer, or the text one.
+- **Signing**: signed checksums and Secure Boot as above. `GENTOO_INSTALLER_WM=none` installs no desktop.
+
 ## What 0.1.2 changed (installer)
 
 A full install through the text installer was run in a VM for the first time (network → disk → account → confirm, with the
@@ -87,7 +112,9 @@ installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and
 | `kernel/config-7.1.8-cachyos1-live` | the full kernel `.config` of the shipped kernel |
 | `kernel/kernel-live.fragment` | the options added on top of `x86_64_defconfig` |
 | `packages/` | installed-package lists |
-| `SHA256SUMS` | checksums of the release files |
+| `SHA256SUMS`, `SHA256SUMS.sig` | checksums of the release files and their signature |
+| `signing/` | the public key (`allowed_signers`), `verify.sh`, and the maintainer's `sign.sh` |
+| `secureboot/simple-linux-db.cer` | the certificate to enrol for Secure Boot |
 
 ## What has and has not been tested
 
@@ -96,9 +123,9 @@ reaches the niri session with the installer, Thunar, Zen and PipeWire running on
 headless install from the minimal image onto a blank virtual disk, after which the installed system boots
 on its own, and the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed.
 
-**Not tested: any real hardware.** Also not done: a real package store with real per-hardware kernels (the
-install test used this same generic kernel), the desktop/GPU-driver steps of the installer on a real
-target, LUKS in the installer, Secure Boot. Treat it as an early build.
+The 0.2.0 install test: a console-only install (`GENTOO_INSTALLER_WM=none`) from the minimal image with a kernel from the store, interrupted at the base-system step, resumed to the end, and the installed disk booted to a login with the right `make.conf`.
+
+**Not tested: any real hardware.** Also not done: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build.
 
 ## Licence
 
