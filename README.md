@@ -14,13 +14,13 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 
 | File | Size | What it is |
 |---|---|---|
-| `simple-linux-minimal.iso` | 1.2 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 1.7 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-minimal.iso` | 1.3 GB | text installer (TUI), rescue tools, firmware |
+| `simple-linux-gui.iso` | 1.8 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks (also already inside both ISOs) |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
 
-Both ISOs boot on BIOS and UEFI (Limine). There is no Secure Boot support and nothing is signed.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.1.1** (0.1.0 did not start on the first laptop it was tried on). There is no Secure Boot support and nothing is signed.
 
 ## Try it
 
@@ -38,6 +38,23 @@ starts a niri session with the installer window; **niri refuses software renderi
 without hardware-accelerated graphics the GUI image falls back to the text installer after ~25 seconds
 (log: `/var/log/niri-session.log`). DHCP runs at boot; Wi-Fi is `iwd` (`iwctl`, the Noctalia network
 widget, or the TUI's network screen).
+
+## If it does not start on your machine
+
+Limine shows a menu for 5 seconds. Try the entries in this order and note which one works:
+
+1. **Simple Linux (live)** - the default, screen only, kernel and dracut messages visible.
+2. **USB workaround** - for `usb X-Y: device descriptor read/64, error -71`, the classic enumeration failure
+   (it helps most when the boot stick sits in the failing port; also try another port, USB 2 if you have one).
+3. **safe graphics (nomodeset)** - if the screen goes black after the kernel starts; you get the text installer.
+4. **verbose** - every kernel and initramfs message, and a shell if the live medium is not found.
+5. **serial console** - only if you have a serial cable.
+
+`[Firmware Bug]: TSC_DEADLINE disabled ... please update microcode` and `error -71` on some USB port are
+warnings on their own; if boot stops, the lines *after* them (use entry 4) say why. Version 0.1.0 had a
+console setting that hid those lines on laptops with a phantom serial port; 0.1.1 fixes that and loads CPU
+microcode early. **No image has been run on real hardware by the author yet** - reports of what the verbose
+entry prints on a failing machine are the most useful thing you can send.
 
 ## What is in the images
 
