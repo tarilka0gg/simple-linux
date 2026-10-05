@@ -22,7 +22,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.0**. (0.1.0 did not start on the first laptop it was tried on; 0.1.1 fixed the boot; 0.1.2 fixed the installer; 0.2.0 is below.)
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.0**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -67,9 +67,9 @@ Limine shows a menu for 5 seconds. Try the entries in this order and note which 
 5. **serial console** - only if you have a serial cable.
 
 `[Firmware Bug]: TSC_DEADLINE disabled ... please update microcode` and `error -71` on some USB port are
-warnings on their own; if boot stops, the lines *after* them (use entry 4) say why. Version 0.1.0 had a
-console setting that hid those lines on laptops with a phantom serial port; 0.1.1 fixes that and loads CPU
-microcode early. **No image has been run on real hardware by the author yet** - reports of what the verbose
+warnings on their own; if boot stops, the lines *after* them (use entry 4) say why. Early versions had a
+console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
+microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
 ## What 0.2.0 changed
