@@ -20,7 +20,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.1.1** (0.1.0 did not start on the first laptop it was tried on). There is no Secure Boot support and nothing is signed.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.1.2**. (0.1.0 did not start on the first laptop it was tried on; 0.1.1 fixed the boot; 0.1.2 fixes the installer itself, see below.) There is no Secure Boot support and nothing is signed.
 
 ## Try it
 
@@ -55,6 +55,16 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; 0.1.1 fixes that and loads CPU
 microcode early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.1.2 changed (installer)
+
+A full install through the text installer was run in a VM for the first time (network → disk → account → confirm, with the
+desktop and the Wi-Fi group), rebooted, and the installed disk booted and logged in. That found and fixed: the text installer had
+**no screen to create a user** (now it has one); it **hid errors** (a failed step left the screen frozen on the last line); it
+read the wm-configs URL from the wrong variable; the **reboot button called `systemctl`** (this system is OpenRC; now `reboot`);
+**no service was enabled on the installed system** (`dbus`, `seatd`, `iwd` now are, with the user in `seat`, `video`, `render`,
+`input`, `audio`); **fish ignored the desktop autostart** and **`/run/user/<uid>` was never created**. Still unseen: a picture of the
+installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and any real hardware.
 
 ## What is in the images
 
