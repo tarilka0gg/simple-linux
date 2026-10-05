@@ -22,7 +22,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.0**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.1**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -55,6 +55,14 @@ without hardware-accelerated graphics the GUI image falls back to the text insta
 (log: `/var/log/niri-session.log`). DHCP runs at boot; Wi-Fi is `iwd` (`iwctl`, the Noctalia network
 widget, or the TUI's network screen).
 
+## Booting from Ventoy
+
+Copy the `.iso` onto a Ventoy stick and pick it in the Ventoy menu, then choose **Boot in grub2 mode**: it works on BIOS
+and on UEFI (Ventoy reads the image's `boot/grub/grub.cfg`, loads the kernel itself and makes the ISO visible to the
+live system). On UEFI, *Boot in normal mode* also works. On **BIOS, normal mode does not work** (Limine in the image stops
+with "Could not determine boot drive"), so use grub2 mode there. Tested with Ventoy 1.1.17 in QEMU (BIOS and UEFI); not on real hardware. 0.2.0 and older
+had no `grub.cfg` and could not be started from Ventoy this way.
+
 ## If it does not start on your machine
 
 Limine shows a menu for 5 seconds. Try the entries in this order and note which one works:
@@ -71,6 +79,10 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.2.1 changed
+
+- The images carry a `boot/grub/grub.cfg`, which is what makes them bootable from Ventoy (see above).
 
 ## What 0.2.0 changed
 
