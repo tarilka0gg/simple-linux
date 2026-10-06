@@ -1,7 +1,6 @@
-852ca98da3dbc06be606cbb7e49c60a5c2cb14f018374ce727cd0863aa3ce764  simple-linux-minimal.iso
-a55e6d28c21d77a897da9c05e6e56d2214ea67a6e1fec8d0a68ad3409094eca5  simple-linux-gui.iso
+fafce6dc513e3751ae9b4eb9bccedfe1d1e66a2490351961da538241dc6e3989  simple-linux-minimal.iso
+0e8ef9ef53312d2089462a6c444ad0807684a64b4ffbd3746948b4de92e614bc  simple-linux-gui.iso
 1175e3d2fab303bdca41e6a7dbfb65a74ec8c22d5f7b8a46886e0aaca01e1a52  simple-linux-stage3-amd64-openrc.tar.xz
-60c16d797ae1777018a732b3529e5bd28197fbb6c2149f5e2aa317564585ef77  simple-linux-stage3-amd64-openrc.tar.xz.sha512
 c4620b83a84bf1a27c274ac65582cba18cf439af147e6a13f865728c873da7e2  simple-linux-kernel-7.1.8.vmlinuz
 3fa45bf840a6c8f41677253f97a9a7e5373bba62ee44dab23aaa6e0677bc3d24  simple-linux-kernel-7.1.8-modules.tar.xz
 a410cdf8496850d3efa3c8eddf966bc06336804d1fd41cf26de00d33f299fc66  simple-linux-kernel-store.tar
