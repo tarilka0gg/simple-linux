@@ -14,15 +14,15 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 
 | File | Size | What it is |
 |---|---|---|
-| `simple-linux-minimal.iso` | 1.3 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 1.7 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-minimal.iso` | 1.1 GB | text installer (TUI), rescue tools, firmware |
+| `simple-linux-gui.iso` | 1.5 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks (also already inside both ISOs) |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.2**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.3**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -80,6 +80,11 @@ console setting that hid those lines on laptops with a phantom serial port; that
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
+## What 0.2.3 changed
+
+- **Smaller:** the Rust and Zig toolchains that were only needed to build the image are no longer in it (minimal 1202 → 1091 MiB, gui 1634 → 1467 MiB, even with the additions below).
+- **More tools** (also in the GUI image), picked from the official Gentoo minimal CD's list: `gptfdisk` (gdisk/sgdisk), `iw` and `wpa_supplicant`, `nmap` (with ncat and nping) and `traceroute`, `eix` and `gentoolkit` (`equery`; Python is in the image for it), `screen`, and **Memtest86+** (two boot-menu entries, BIOS and UEFI; under Secure Boot the UEFI one is refused by the firmware since it is unsigned). The Portage tree is not on the medium, so `eix`/`equery` are only useful once you have one.
+
 ## What 0.2.2 changed
 
 - **The installer now starts on older CPUs.** `installer-cli`/`installer-gui` were linked on a machine whose libc is built for x86-64-v3, so the binaries carried a "v3 needed" note and the live system refused to run them on anything older than Haswell (Westmere, Sandy/Ivy Bridge Xeons: "CPU ISA level is lower than required"). The images booted fine; only the installer did not start. Fixed, and checked in QEMU with Westmere, Sandy Bridge and a plain `qemu64` CPU, BIOS and UEFI, both images, 1 to 4 CPUs, 1 to 3 GB of RAM.
@@ -113,7 +118,7 @@ installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and
   live boot with OverlayFS, `fish` as root's shell with `eza`/`dust`/`gping`/`micro` aliases, no `nano`.
 - **Firmware and rescue kit**: `linux-firmware` (pruned to laptop/desktop hardware), `sof-firmware`,
   microcode; `xfsprogs`, `ntfs-3g`, `exfatprogs`, `f2fs-tools`, `cryptsetup`, `lvm2`, `mdadm`, `testdisk`,
-  `ddrescue`, `smartmontools`, `nvme-cli`, `hdparm`, `usbutils`, `dmidecode`, `htop`, `tmux`, `tcpdump`, ….
+  `ddrescue`, `smartmontools`, `nvme-cli`, `hdparm`, `usbutils`, `dmidecode`, `htop`, `tmux`, `screen`, `tcpdump`, `nmap`, `gptfdisk`, `iw`, `wpa_supplicant`, `Memtest86+`, ….
 - **GUI image only**: niri 26.04, Noctalia 5.2.0, Zen Browser, Thunar (gvfs, tumbler), GParted, PipeWire +
   WirePlumber, ghostty, `btop`, `imv`, `wl-clipboard`.
 - Package lists (`category/name-version`, from the image's package database): `packages/minimal.txt`,

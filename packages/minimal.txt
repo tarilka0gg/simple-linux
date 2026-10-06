@@ -24,6 +24,7 @@ acct-group/sshd-0-r3
 acct-group/tape-0-r3
 acct-group/tty-0-r3
 acct-group/usb-0-r3
+acct-group/utmp-0-r3
 acct-group/video-0-r3
 acct-user/mail-0-r3
 acct-user/man-1-r3
@@ -68,6 +69,7 @@ app-doc/info-manual-30.2
 app-editors/micro-2.0.15
 app-eselect/eselect-iptables-20220320
 app-eselect/eselect-lib-bin-symlink-0.1.1-r1
+app-eselect/eselect-lua-4-r3
 app-eselect/eselect-pinentry-0.7.5
 app-eselect/eselect-rust-20210703
 app-i18n/gnulib-l10n-20241231
@@ -75,14 +77,19 @@ app-misc/ca-certificates-20260601.3.112.5
 app-misc/editor-wrapper-4-r1
 app-misc/mime-types-2.1.54
 app-misc/pax-utils-1.3.10
+app-misc/screen-4.9.1-r2
 app-misc/tmux-3.6a
 app-portage/cpuid2cpuflags-17
+app-portage/eix-0.36.9
 app-portage/elt-patches-20250718
 app-portage/gemato-20.15
+app-portage/gentoolkit-0.8.1
 app-portage/getuto-2.0
 app-portage/portage-utils-0.97.1
 app-shells/bash-5.3_p15
 app-shells/fish-4.6.0
+app-shells/push-3.4
+app-shells/quoter-4.2
 app-text/asciidoc-10.2.1
 app-text/build-docbook-catalog-2.4
 app-text/docbook-xml-dtd-4.1.2-r7
@@ -115,6 +122,7 @@ dev-db/sqlite-3.53.3
 dev-debug/strace-7.1
 dev-lang/go-1.26.7
 dev-lang/go-bootstrap-1.24.6
+dev-lang/lua-5.4.8
 dev-lang/nasm-3.02
 dev-lang/perl-5.44.0
 dev-lang/python-3.14.7
@@ -138,7 +146,9 @@ dev-libs/libgcrypt-1.12.4
 dev-libs/libgit2-1.9.7
 dev-libs/libgpg-error-1.61
 dev-libs/libksba-1.8.0
+dev-libs/liblinear-246
 dev-libs/libltdl-2.5.4
+dev-libs/libnl-3.12.0
 dev-libs/libpcre2-10.47
 dev-libs/libpipeline-1.5.8
 dev-libs/libtasn1-4.21.0
@@ -269,7 +279,9 @@ media-libs/freetype-2.14.3
 media-libs/libjpeg-turbo-3.1.4.1
 media-libs/libpng-1.6.58
 net-analyzer/gping-1.20.1
+net-analyzer/nmap-7.991
 net-analyzer/tcpdump-4.99.6
+net-analyzer/traceroute-2.1.5
 net-dns/c-ares-1.34.8
 net-dns/libidn2-2.3.8
 net-firewall/iptables-1.8.13
@@ -292,8 +304,10 @@ net-misc/netifrc-0.7.14-r1
 net-misc/openssh-10.4_p1-r1
 net-misc/rsync-3.5.1
 net-misc/wget-1.25.0-r2
+net-wireless/iw-6.17
 net-wireless/iwd-3.12
 net-wireless/wireless-regdb-20260530
+net-wireless/wpa_supplicant-2.11-r4
 perl-core/File-Temp-0.231.200
 sec-keys/openpgp-keys-gentoo-release-20260125
 sys-apps/acl-2.4.0-r2
@@ -309,6 +323,7 @@ sys-apps/file-5.48
 sys-apps/findutils-4.11.0
 sys-apps/gawk-5.3.2
 sys-apps/gentoo-functions-1.7.7
+sys-apps/gptfdisk-1.0.10-r1
 sys-apps/grep-3.12
 sys-apps/groff-1.23.0-r2
 sys-apps/hdparm-9.65-r2
@@ -324,6 +339,7 @@ sys-apps/locale-gen-3.10
 sys-apps/lsb-release-3.3
 sys-apps/man-db-2.13.1-r1
 sys-apps/man-pages-6.17-r1
+sys-apps/memtest86+-7.20
 sys-apps/net-tools-2.10
 sys-apps/nvme-cli-2.16
 sys-apps/openrc-0.63.3

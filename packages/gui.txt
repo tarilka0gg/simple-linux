@@ -28,6 +28,7 @@ acct-group/sshd-0-r3
 acct-group/tape-0-r3
 acct-group/tty-0-r3
 acct-group/usb-0-r3
+acct-group/utmp-0-r3
 acct-group/video-0-r3
 acct-user/mail-0-r3
 acct-user/man-1-r3
@@ -91,14 +92,19 @@ app-misc/ca-certificates-20260601.3.112.5
 app-misc/editor-wrapper-4-r1
 app-misc/mime-types-2.1.54
 app-misc/pax-utils-1.3.10
+app-misc/screen-4.9.1-r2
 app-misc/tmux-3.6a
 app-portage/cpuid2cpuflags-17
+app-portage/eix-0.36.9
 app-portage/elt-patches-20250718
 app-portage/gemato-20.15
+app-portage/gentoolkit-0.8.1
 app-portage/getuto-2.0
 app-portage/portage-utils-0.97.1
 app-shells/bash-5.3_p15
 app-shells/fish-4.6.0
+app-shells/push-3.4
+app-shells/quoter-4.2
 app-text/asciidoc-10.2.1
 app-text/build-docbook-catalog-2.4
 app-text/docbook-xml-dtd-4.1.2-r7
@@ -193,7 +199,9 @@ dev-libs/libgudev-238-r2
 dev-libs/libical-3.0.20-r2
 dev-libs/libinput-1.31.3
 dev-libs/libksba-1.8.0
+dev-libs/liblinear-246
 dev-libs/libltdl-2.5.4
+dev-libs/libnl-3.12.0
 dev-libs/libpcre2-10.47
 dev-libs/libpipeline-1.5.8
 dev-libs/libsass-3.6.6
@@ -369,6 +377,7 @@ gui-libs/gtk4-layer-shell-1.1.1-r1
 gui-libs/gtk-layer-shell-0.10.1
 gui-libs/libadwaita-1.8.7
 gui-libs/wlroots-0.20.2
+gui-wm/cage-0.3.1
 gui-wm/niri-26.04
 gui-wm/sway-1.12-r1
 llvm-core/clang-22.1.8
@@ -425,7 +434,9 @@ media-video/ffmpeg-compat-7.1.5
 media-video/pipewire-1.6.8
 media-video/wireplumber-0.5.15
 net-analyzer/gping-1.20.1
+net-analyzer/nmap-7.991
 net-analyzer/tcpdump-4.99.6
+net-analyzer/traceroute-2.1.5
 net-dns/c-ares-1.34.8
 net-dns/libidn2-2.3.8
 net-firewall/iptables-1.8.13
@@ -455,8 +466,10 @@ net-misc/openssh-10.4_p1-r1
 net-misc/rsync-3.5.1
 net-misc/wget-1.25.0-r2
 net-print/cups-2.4.19
+net-wireless/iw-6.17
 net-wireless/iwd-3.12
 net-wireless/wireless-regdb-20260530
+net-wireless/wpa_supplicant-2.11-r4
 perl-core/File-Temp-0.231.200
 sci-libs/libqalculate-5.10.0
 sec-keys/openpgp-keys-gentoo-release-20260125
@@ -490,6 +503,7 @@ sys-apps/locale-gen-3.10
 sys-apps/lsb-release-3.3
 sys-apps/man-db-2.13.1-r1
 sys-apps/man-pages-6.17-r1
+sys-apps/memtest86+-7.20
 sys-apps/net-tools-2.10
 sys-apps/nvme-cli-2.16
 sys-apps/openrc-0.63.3
