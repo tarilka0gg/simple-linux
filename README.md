@@ -14,8 +14,8 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 
 | File | Size | What it is |
 |---|---|---|
-| `simple-linux-minimal.iso` | 0.9 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 1.3 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-minimal.iso` | 0.8 GB | text installer (TUI), rescue tools, firmware |
+| `simple-linux-gui.iso` | 1.0 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
 | `simple-linux-stage3-amd64-openrc.tar.xz.sha512` | 170 B | its SHA-512, read by the installer |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
@@ -23,7 +23,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.4**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.5**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -81,6 +81,11 @@ console setting that hid those lines on laptops with a phantom serial port; that
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
+## What 0.2.5 changed
+
+- **Smaller again** (minimal 851 → 747 MiB, gui 1227 → about 1000 MiB): Zen Browser and the NVIDIA GSP firmware are no longer on the medium.
+- **Zen is downloaded on first use.** The GUI image has a "Zen Browser" entry (and `get-zen`) that fetches the current release from Zen's GitHub page (~110 MB, HTTPS, no checksum is published there) and runs it. Without that firmware the live GUI on RTX 20xx and newer cards runs in software (the cage fallback); the installed system is not affected.
+
 ## What 0.2.4 changed
 
 - **The stage3 is downloaded, not shipped** (minimal 1091 → 851 MiB, gui 1467 → 1227 MiB). The images set `GENTOO_INSTALLER_STAGE3_URL` to the latest release's stage3 and the installer verifies it against the `.sha512` published next to it. A full install in a VM did this, and the installed system had fish, eza and micro, no nano. For use without a network you need your own image: `STAGE_TARBALL=… iso/assemble-iso.sh` (see the installer repository).
@@ -124,7 +129,7 @@ installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and
 - **Firmware and rescue kit**: `linux-firmware` (pruned to laptop/desktop hardware), `sof-firmware`,
   microcode; `xfsprogs`, `ntfs-3g`, `exfatprogs`, `f2fs-tools`, `cryptsetup`, `lvm2`, `mdadm`, `testdisk`,
   `ddrescue`, `smartmontools`, `nvme-cli`, `hdparm`, `usbutils`, `dmidecode`, `htop`, `tmux`, `screen`, `tcpdump`, `nmap`, `gptfdisk`, `iw`, `wpa_supplicant`, `Memtest86+`, ….
-- **GUI image only**: niri 26.04, Noctalia 5.2.0, Zen Browser, Thunar (gvfs, tumbler), GParted, PipeWire +
+- **GUI image only**: niri 26.04, Noctalia 5.2.0, Zen Browser (downloaded on first use), Thunar (gvfs, tumbler), GParted, PipeWire +
   WirePlumber, ghostty, `btop`, `imv`, `wl-clipboard`.
 - Package lists (`category/name-version`, from the image's package database): `packages/minimal.txt`,
   `packages/gui.txt`. They include packages that were needed to *build* the image; their compilers, headers
