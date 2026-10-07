@@ -1,5 +1,5 @@
-57eadeb169f26a0ca4c0fe0ac8e02a21afed8be65486a935ffa9219f718a6735  simple-linux-minimal_VTGRUB2.iso
-7b8b0f6fb34b61afd72d8535ecdbad497c21063ed7a28900651f49bcfddf6028  simple-linux-gui_VTGRUB2.iso
+8fcdfa86a97aac3069480675bd497b3246addd5ce26904ad678151a327b3567f  simple-linux-minimal.iso
+e8512238c2670185cd360551fd22916770908f6bf785423a2575f4eb9bcdcd5a  simple-linux-gui.iso
 1175e3d2fab303bdca41e6a7dbfb65a74ec8c22d5f7b8a46886e0aaca01e1a52  simple-linux-stage3-amd64-openrc.tar.xz
 c4620b83a84bf1a27c274ac65582cba18cf439af147e6a13f865728c873da7e2  simple-linux-kernel-7.1.8.vmlinuz
 3fa45bf840a6c8f41677253f97a9a7e5373bba62ee44dab23aaa6e0677bc3d24  simple-linux-kernel-7.1.8-modules.tar.xz
