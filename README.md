@@ -23,7 +23,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.15**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.16**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -80,6 +80,10 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.2.16 changed
+
+- **The installer inside the images is the current one.** The 0.2.14 and 0.2.15 images were built from an older build of the graphical installer, without the later changes (the software step in the normal flow, working search in the keyboard and timezone lists, uniform icon badges). Nothing else differs from 0.2.15. Checked in QEMU: both images boot from Ventoy (BIOS and UEFI, normal mode) and written straight to a stick (BIOS, UEFI, Secure Boot).
 
 ## What 0.2.15 changed
 
