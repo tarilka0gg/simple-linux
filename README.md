@@ -14,8 +14,8 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 
 | File | Size | What it is |
 |---|---|---|
-| `simple-linux-minimal.iso` | 0.5 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 0.8 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-minimal_VTGRUB2.iso` | 0.5 GB | text installer (TUI), rescue tools, firmware |
+| `simple-linux-gui_VTGRUB2.iso` | 0.8 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
 | `simple-linux-stage3-amd64-openrc.tar.xz.sha512` | 170 B | its SHA-512, read by the installer |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
@@ -23,7 +23,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.14**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.15**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -41,13 +41,13 @@ Both ISOs are Secure Boot capable but **not Microsoft-signed**: a stock firmware
 
 ## Try it
 
-In a VM: `qemu-system-x86_64 -enable-kvm -m 4096 -cdrom simple-linux-minimal.iso` (add an OVMF pflash for UEFI).
+In a VM: `qemu-system-x86_64 -enable-kvm -m 4096 -cdrom simple-linux-minimal_VTGRUB2.iso` (add an OVMF pflash for UEFI).
 
 On a stick (this erases the stick — check the device name first):
 
 ```
 sha256sum -c --ignore-missing SHA256SUMS
-sudo dd if=simple-linux-gui.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sudo dd if=simple-linux-gui_VTGRUB2.iso of=/dev/sdX bs=4M status=progress conv=fsync
 ```
 
 The live system logs in as `root` automatically (empty password) and starts the installer. The GUI image
@@ -58,7 +58,7 @@ widget, or the TUI's network screen).
 
 ## Booting from Ventoy
 
-Copy the `.iso` onto a Ventoy stick and pick it in the Ventoy menu, then choose **Boot in grub2 mode**: it works on BIOS
+Copy the `.iso` onto a Ventoy stick and pick it in the Ventoy menu. Since 0.2.15 the file name ends in `_VTGRUB2`, so Ventoy uses **grub2 mode** by itself (keep the suffix when renaming; for older images choose that mode by hand): it works on BIOS
 and on UEFI (Ventoy reads the image's `boot/grub/grub.cfg`, loads the kernel itself and makes the ISO visible to the
 live system). On UEFI, *Boot in normal mode* also works. On **BIOS, normal mode does not work** (Limine in the image stops
 with "Could not determine boot drive"), so use grub2 mode there. Tested with Ventoy 1.1.17 in QEMU (BIOS and UEFI); not on real hardware. 0.2.0 and older
@@ -80,6 +80,11 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.2.15 changed
+
+- **Ventoy now picks the right mode by itself.** The image file names end in `_VTGRUB2`, which is Ventoy's own suffix for "boot in grub2 mode". Before, you had to choose that mode by hand; in Ventoy's normal mode the BIOS boot stopped with Limine's "Could not determine boot drive" (and one reported UEFI boot ended in a Limine hash-mismatch panic, which I could not reproduce). Checked in QEMU with Ventoy 1.1.17: a stick with the renamed image boots with a single Enter on BIOS. The suffix is only a name; writing the file with `dd` is unaffected.
+- **Zen Browser downloads in the background** as soon as the graphical session starts (no terminal window any more); opening it earlier just waits for the download.
 
 ## What 0.2.14 changed
 
