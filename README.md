@@ -23,7 +23,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.20**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.21**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -80,6 +80,12 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.2.21 changed
+
+- **Launcher and dock.** The dock pins the Zen Browser entry that downloads the browser (not the empty `zen-zen-bin` one); Noctalia, Panel, About Xfce, the Thunar helpers and the console tools (btop, Micro) are hidden from the launcher. Application icons are glyph-style (symbolic) and Noctalia recolours them to the wallpaper palette; the full-colour icon sets only gave solid blobs when recoloured.
+- **Colours follow the wallpaper everywhere:** the focus ring and window borders of niri come from the same palette (`noctalia.kdl`). The random wallpaper is requested until Noctalia has really applied one (it could be missed at start). The deprecated `middle_click_opens_widget_settings` line, which showed a notification, is gone.
+- **Wallpapers:** 17 left (the Dragon Ball one and a 5120x1440 ultrawide are removed). Checked in QEMU only. The minimal image is unchanged.
 
 ## What 0.2.20 changed
 

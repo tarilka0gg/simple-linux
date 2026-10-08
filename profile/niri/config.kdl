@@ -7,8 +7,8 @@
 
 prefer-no-csd
 
-// Noctalia-generated colors — included FIRST so manual overrides below win
-// include "noctalia.kdl"  // вимкнено: Noctalia перегенеровує цей файл і перебиває futuro-darko кольори (focus-ring #f6f5f4)
+// Noctalia writes its colours (focus ring, borders) to noctalia.kdl from the wallpaper palette;
+// the include is at the end of this file so it wins over the fallback colours below.
 
 hotkey-overlay {
     skip-at-startup
@@ -395,3 +395,5 @@ output "Invalid Vendor Codename - RTK 0x0101 0x01010101" {
 
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+include "noctalia.kdl"

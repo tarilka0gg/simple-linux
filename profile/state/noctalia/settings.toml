@@ -59,7 +59,7 @@ item_spacing = 4
 launcher_position = "end"
 main_axis_padding = 12
 margin_edge = 4
-pinned = [ "com.mitchellh.ghostty", "thunar", "zen-zen-bin" ]
+pinned = [ "com.mitchellh.ghostty", "thunar", "zen-browser" ]
 show_dots = true
 
 [hot_corners.top_right]
@@ -79,8 +79,8 @@ keyboard_layout = false
 nightlight = false
 
 [shell]
-app_icon_color = "surface"
-app_icon_colorize = false
+app_icon_color = "on_surface"
+app_icon_colorize = true
 clipboard_history_max_entries = 500
 niri_overview_type_to_launch_enabled = true
 screen_time_enabled = true
@@ -110,7 +110,7 @@ source = "wallpaper"
 wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
-    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty" ]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "niri" ]
     community_ids = [  ]
 
 [widget.battery]

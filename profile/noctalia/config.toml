@@ -16,7 +16,6 @@ niri_overview_type_to_launch_enabled = false # opt in to type-to-launch from nir
 polkit_agent          = false
 password_style        = "default"    # default | random
 settings_show_advanced = false       # show advanced settings by default in Settings
-middle_click_opens_widget_settings = true # middle-click bar widgets to open their Settings entry
 show_location         = true         # hide weather location text in shell UI when false
 # app_icon_colorize   = false        # recolor application icons across the shell
 # app_icon_color      = "on_surface" # ColorSpec role or #hex when colorize is enabled
