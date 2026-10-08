@@ -15,6 +15,9 @@ name every package and version that was installed when an image was built.
   are in `kernel/kernel-live.fragment`.
 - Installer, image build scripts and the custom-stage builder: https://github.com/tarilka0gg/gentoo-installer
   (GPL-2.0-or-later).
+- GTK look of the graphical image: the WhiteSur icon theme (vinceliuice/WhiteSur-icon-theme, GPL-3.0) and the
+  Gruvbox GTK theme (Fausto-Korpsvart/Gruvbox-GTK-Theme, GPL-3.0) are copied in unchanged from their upstream
+  releases.
 - Limine (the boot loader) is BSD-2-Clause; its source is in Gentoo as `sys-boot/limine`.
 
 If you need a source archive that is no longer on Gentoo's mirrors, open an issue.

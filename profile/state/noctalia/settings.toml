@@ -80,7 +80,7 @@ nightlight = false
 
 [shell]
 app_icon_color = "surface"
-app_icon_colorize = true
+app_icon_colorize = false
 clipboard_history_max_entries = 500
 niri_overview_type_to_launch_enabled = true
 screen_time_enabled = true
@@ -104,15 +104,14 @@ ui_scale = 0.95000000670552254
     wallpaper_position = "center"
 
 [theme]
-builtin = "Noctalia"
-community_palette = "Futuro Darko"
+builtin = "Gruvbox"
 mode = "light"
-source = "community"
+source = "builtin"
 wallpaper_scheme = "faithful"
 
     [theme.templates]
     builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "kcolorscheme", "qt" ]
-    community_ids = [ "neovim", "fuzzel", "telegram", "yazi" ]
+    community_ids = [  ]
 
 [widget.battery]
 show_label = false
