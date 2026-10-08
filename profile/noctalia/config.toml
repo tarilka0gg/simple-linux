@@ -70,7 +70,7 @@ transition          = ["fade", "wipe", "disc", "stripes", "zoom", "honeycomb"]
 transition_duration = 1500          # milliseconds
 edge_smoothness     = 0.3
 transition_on_startup = false       # animate the first wallpaper at shell startup (v4-style)
-directory           = "~/Pictures/Wallpapers"
+directory           = "~/Pictures/Wallpapers/simple"
 directory_light     = ""            # optional day-mode directory
 directory_dark      = ""            # optional night-mode directory
 
@@ -87,10 +87,10 @@ recursive                  = true    # include subdirectories when picking rando
 
 [theme]
 mode   = "light"                    # dark | light | auto
-source = "builtin"                  # builtin | wallpaper | community
-builtin = "Gruvbox"                  # Ayu | Catppuccin | Dracula | Eldritch | Gruvbox |
+source = "wallpaper"                 # builtin | wallpaper | community
+builtin = "Noctalia"                 # Ayu | Catppuccin | Dracula | Eldritch | Gruvbox |
                                     # Kanagawa | Noctalia | Nord | Rosé Pine | Tokyo-Night
-# wallpaper_scheme  = "m3-content"  # m3-tonal-spot | m3-content | m3-fruit-salad |
+wallpaper_scheme  = "m3-tonal-spot"  # m3-tonal-spot | m3-content | m3-fruit-salad |
                                     # m3-rainbow | m3-monochrome | vibrant | faithful |
                                     # dysfunctional | muted
 

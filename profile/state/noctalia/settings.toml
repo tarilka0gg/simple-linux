@@ -104,13 +104,13 @@ ui_scale = 0.95000000670552254
     wallpaper_position = "center"
 
 [theme]
-builtin = "Gruvbox"
+builtin = "Noctalia"
 mode = "light"
-source = "builtin"
-wallpaper_scheme = "faithful"
+source = "wallpaper"
+wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
-    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty", "kcolorscheme", "qt" ]
+    builtin_ids = [ "btop", "cava", "gtk3", "gtk4", "ghostty" ]
     community_ids = [  ]
 
 [widget.battery]

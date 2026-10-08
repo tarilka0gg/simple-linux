@@ -8,7 +8,7 @@
 prefer-no-csd
 
 // Noctalia-generated colors — included FIRST so manual overrides below win
-// include "noctalia.kdl"  // вимкнено: Noctalia перегенеровує цей файл і перебиває futuro-darko кольори (focus-ring #ebdbb2)
+// include "noctalia.kdl"  // вимкнено: Noctalia перегенеровує цей файл і перебиває futuro-darko кольори (focus-ring #f6f5f4)
 
 hotkey-overlay {
     skip-at-startup
@@ -80,15 +80,15 @@ layout {
     border {
 
         width 2
-        active-color   "#98971a"
-        inactive-color "#a89984"
-        urgent-color   "#cc241d"
+        active-color   "#3584e4"
+        inactive-color "#c0bfbc"
+        urgent-color   "#e01b24"
     }
 
     focus-ring {
        width 2
-       active-color   "#98971a"
-       inactive-color "#a89984"
+       active-color   "#3584e4"
+       inactive-color "#c0bfbc"
    }
 
     shadow {
@@ -107,7 +107,7 @@ overview {
     zoom 0.75
 
     // Solid backdrop between workspaces, matches gruvbox-material-light bg
-    backdrop-color "#ebdbb2"
+    backdrop-color "#f6f5f4"
 
     // Uncomment to disable the workspace shadow in the overview.
     //workspace-shadow {

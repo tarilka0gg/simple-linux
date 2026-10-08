@@ -23,7 +23,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.19**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.20**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -80,6 +80,11 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## What 0.2.20 changed
+
+- **A different wallpaper on every start, and the colours follow it.** The graphical session picks a random wallpaper from `~/Pictures/Wallpapers/simple` when it starts, and Noctalia generates the palette from it (Material You, `m3-tonal-spot`, light); GTK 3/4 apps and the installer use that palette. Replaces the fixed Gruvbox look of 0.2.19: the GTK theme is plain Adwaita, the niri borders are neutral.
+- **The installer has a launcher entry** (`Install Simple Linux`, with an icon), so the dock and launcher no longer show the raw app id. Icons are WhiteSur. Checked in QEMU only: the random pick itself was seen to run, a change of palette between starts was not looked at on screen. The minimal image is unchanged.
 
 ## What 0.2.19 changed
 
