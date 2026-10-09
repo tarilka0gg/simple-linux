@@ -7,6 +7,24 @@ The installer and the scripts that build all of this live in
 [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) (GPL-2.0-or-later). This repository
 holds what comes out of that build, and the parts that are configuration rather than code.
 
+## Why this instead of a plain Gentoo install
+
+Gentoo's handbook route is a day of typing and hours of compiling. Simple Linux keeps Gentoo underneath (Portage, OpenRC, your own `USE` flags
+and overlays stay available) and removes the first day:
+
+- **A real installer, with a graphical one.** Partitioning, locale and time zone (guessed from the keyboard layout), user, desktop, software groups
+  and GPU driver are choices in a wizard; a failed install can be **resumed** from where it stopped instead of started over.
+- **A kernel built for your hardware, not compiled on it.** The installer detects CPU generation, GPU vendor and laptop/desktop, and copies the matching prebuilt kernel
+  from the store (a generic x86-64 v2/v3 build when nothing more specific exists). Large packages come as binaries from Gentoo's own host.
+- **A desktop that is ready.** niri + Noctalia whose colours follow the wallpaper, PipeWire, Thunar, a browser that downloads itself, plus
+  [ustan](https://github.com/tarilka0gg/ustan) for `.deb`, AppImage, Flatpak and `.exe` files and a graphical app store for Portage.
+- **Every decision is a `git log`.** The installer commits what it wrote to `/etc/portage`, so "what did it do" and "undo it" are ordinary git.
+- **You can see and check it.** The images are signed (`SHA256SUMS.sig`), Secure Boot capable, and this repository is the configuration, not a blob.
+
+What it is not: not a binary distribution with its own repository of everything (anything outside the store and Gentoo's binhost compiles on your machine),
+no disk encryption yet, no Microsoft-signed Secure Boot, and **not yet confirmed on the author's own hardware** (see below). If you want a distro that is
+finished and supported today, use one; if you want Gentoo without the first day, try this and report what happens.
+
 ## Downloads
 
 Everything large is attached to the **Releases** page (GitHub will not take files over 100 MB in git).
