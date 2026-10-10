@@ -15,14 +15,18 @@ and overlays stay available) and removes the first day:
 - **A real installer, with a graphical one.** Partitioning, locale and time zone (guessed from the keyboard layout), user, desktop, software groups
   and GPU driver are choices in a wizard; a failed install can be **resumed** from where it stopped instead of started over.
 - **A kernel built for your hardware, not compiled on it.** The installer detects CPU generation, GPU vendor and laptop/desktop, and copies the matching prebuilt kernel
-  from the store (a generic x86-64 v2/v3 build when nothing more specific exists). Large packages come as binaries from Gentoo's own host.
-- **A desktop that is ready.** niri + Noctalia whose colours follow the wallpaper, PipeWire, Thunar, a browser that downloads itself, plus
+  from the store (a generic x86-64 v2/v3 build when nothing more specific exists).
+- **A binary install.** The packages come prebuilt: from Gentoo's own binhost, and from [this project's own](https://github.com/tarilka0gg/simple-linux-binhost)
+  for what Gentoo does not build (niri, Noctalia, ghostty, the packages whose USE the installer changes), signed and built against the same Portage
+  tree snapshot the installer unpacks. A full install, desktop and all software groups, merged 263 packages in a VM and compiled none (about 15 minutes).
+- **A desktop that is ready.** niri + Noctalia whose colours follow the wallpaper (the terminal, GTK programs, btop, tmux, fastfetch and the niri
+  borders too, through Noctalia's templates), PipeWire, Thunar, a browser that downloads itself, plus
   [ustan](https://github.com/tarilka0gg/ustan) for `.deb`, AppImage, Flatpak and `.exe` files and a graphical app store for Portage.
 - **Every decision is a `git log`.** The installer commits what it wrote to `/etc/portage`, so "what did it do" and "undo it" are ordinary git.
 - **You can see and check it.** The images are signed (`SHA256SUMS.sig`), Secure Boot capable, and this repository is the configuration, not a blob.
 
-What it is not: not a binary distribution with its own repository of everything (anything outside the store and Gentoo's binhost compiles on your machine),
-no disk encryption yet, no Microsoft-signed Secure Boot, and **not yet confirmed on the author's own hardware** (see below). If you want a distro that is
+What it is not: not a binary distribution with its own repository of everything (anything outside Gentoo's binhost and this project's compiles on your machine),
+no disk encryption yet, no Microsoft-signed Secure Boot (an installed system can sign its own bootloader with a key made on that machine, see below), and **not yet confirmed on the author's own hardware** (see below). If you want a distro that is
 finished and supported today, use one; if you want Gentoo without the first day, try this and report what happens.
 
 ## Downloads
@@ -98,6 +102,30 @@ warnings on their own; if boot stops, the lines *after* them (use entry 4) say w
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
+
+## Next release (not published yet)
+
+Built and tested in QEMU, not yet released:
+
+- **Binary install.** The installer adds [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) as a second binary host (signed, higher priority than Gentoo's),
+  trusts its key the way `getuto` trusts Gentoo's, and unpacks the Portage tree snapshot the packages were built against instead of the day's tree. `make.conf` no longer sets this
+  machine's `CPU_FLAGS_X86` or an unusual `VIDEO_CARDS` in binary mode (they made Gentoo's binaries mismatch and Portage compiled `mesa`, `pixman`, ...), and a `cpuid2cpuflags` bug
+  that put the variable's name into the value is fixed. Packages are merged in parallel (`--jobs`). Optional groups state the USE they need (Qt `opengl`, `qml`, ...); `*/*::guru ~amd64`
+  fixes the install that stopped on `mangohud`'s GURU dependencies; `DONT_MOUNT_BOOT` fixes `linux-firmware` aborting in the chroot.
+- **The installer shows progress.** The Installing page lists every step (tick, spinner, cross, time taken), says what is happening now (a download in MB, "package 3 of 31"), has a bar
+  with percent and elapsed time, and the log is open and follows the newest line; it now includes what the commands print.
+- **`/` and `/home` on separate partitions.** After ESP and swap the system gets 20 % (40 % on a disk under 128 GiB, never under 20 GiB), `/home` the rest, so a full home cannot starve the system.
+  On a disk with less than 40 GiB left after swap everything stays in root.
+- **The wallpaper's colours reach the programs.** niri's ring and borders, ghostty, btop, GTK 3/4 (with `adw-gtk3`), micro, tmux, fastfetch, GIMP; Noctalia starts after the wallpaper is chosen,
+  so there is no flash of the wrong theme. The installed system gets the same, with the project's wallpapers and a random one at every start. (`simple-linux-configs`: `apps/`, `noctalia/hooks/`.)
+- **Enter works on the account page** (username, password, confirmation, Continue).
+- **Secure Boot for the installed system** (off by default): a key made on the machine, Limine and its config signed and pinned; the certificate is put in `/boot/secureboot/` to enrol.
+  **`simple-linux-update`** updates the kernel (the old one stays as a boot entry) and runs `emerge` for the system.
+- **Live image:** the look of the profile no longer pins the author's palette, wallpaper folder or niri colours; the Zen entry in the dock is the one that downloads the browser.
+
+Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
+the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
+screens), Secure Boot of the installed system under OVMF, any real hardware.
 
 ## What 0.2.21 changed
 
@@ -221,7 +249,7 @@ installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and
 - **Firmware and rescue kit**: `linux-firmware` (pruned to laptop/desktop hardware), `sof-firmware`,
   microcode; `xfsprogs`, `ntfs-3g`, `exfatprogs`, `f2fs-tools`, `cryptsetup`, `lvm2`, `mdadm`, `testdisk`,
   `ddrescue`, `smartmontools`, `nvme-cli`, `hdparm`, `usbutils`, `dmidecode`, `htop`, `tmux`, `screen`, `tcpdump`, `nmap`, `gptfdisk`, `iw`, `wpa_supplicant`, `Memtest86+`, ….
-- **GUI image only**: niri 26.04, Noctalia 5.2.0, ustan (with its menu entry; the minimal image has the `ustan` command), Zen Browser (downloaded on first use), Thunar (gvfs, tumbler), GParted, PipeWire +
+- **GUI image only**: niri 26.04, Noctalia 5.2.1, ustan (with its menu entry; the minimal image has the `ustan` command), Zen Browser (downloaded on first use), Thunar (gvfs, tumbler), GParted, PipeWire +
   WirePlumber, ghostty, `btop`, `imv`, `wl-clipboard`.
 - Package lists (`category/name-version`, from the image's package database): `packages/minimal.txt`,
   `packages/gui.txt`. They include packages that were needed to *build* the image; their compilers, headers
@@ -244,7 +272,7 @@ installed desktop (the VM's virtual GPU has no driver in the installed Mesa) and
 Tested, in QEMU/KVM: both ISOs boot on BIOS and UEFI, as a CD and as a USB stick (minimal); the GUI image
 reaches the niri session with the installer, Thunar, Zen and PipeWire running on a virtual 3D GPU; a full
 headless install from the minimal image onto a blank virtual disk, after which the installed system boots
-on its own, and the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed.
+on its own, and the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed. (Later, for the next release: full installs with every software group, a bare desktop booting on a virtio-gpu, `/` and `/home` on their own partitions.)
 
 The 0.2.0 install test: a console-only install (`GENTOO_INSTALLER_WM=none`) from the minimal image with a kernel from the store, interrupted at the base-system step, resumed to the end, and the installed disk booted to a login with the right `make.conf`.
 
