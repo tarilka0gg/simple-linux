@@ -118,6 +118,12 @@ Built and tested in QEMU, not yet released:
   On a disk with less than 40 GiB left after swap everything stays in root.
 - **The wallpaper's colours reach the programs.** niri's ring and borders, ghostty, btop, GTK 3/4 (with `adw-gtk3`), micro, tmux, fastfetch, GIMP; Noctalia starts after the wallpaper is chosen,
   so there is no flash of the wrong theme. The installed system gets the same, with the project's wallpapers and a random one at every start. (`simple-linux-configs`: `apps/`, `noctalia/hooks/`.)
+- **Touchpads work.** The live kernel had only `I2C_HID_ACPI`: on a laptop whose touchpad hangs off the chipset's Serial IO I2C bus (the HP Victus' `SYNA32E3`, most
+  laptops since about 2019) no input device appeared at all. It now has the Intel Serial IO (`MFD_INTEL_LPSS`, `I2C_DESIGNWARE`), GPIO (`PINCTRL` Intel and AMD), `HID_MULTITOUCH`, RMI4, Elan, THC/QuickI2C
+  and sensor-hub drivers (+4.6 MiB image, all of them load in a VM; **the touchpad itself is not confirmed on real hardware yet**). The generic store kernels (x86-64 v2/v3) lacked them too and are rebuilt;
+  the Raptor Lake builds already had them.
+- **Ghostty takes the wallpaper's colours.** Its starting config also loads Noctalia's theme file as a `config-file`, which wins over colours set by hand, and the Noctalia start script
+  creates the ghostty config if a system lacks one.
 - **Enter works on the account page** (username, password, confirmation, Continue).
 - **Secure Boot for the installed system** (off by default): a key made on the machine, Limine and its config signed and pinned; the certificate is put in `/boot/secureboot/` to enrol.
   **`simple-linux-update`** updates the kernel (the old one stays as a boot entry) and runs `emerge` for the system.
