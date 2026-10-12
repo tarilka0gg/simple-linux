@@ -45,7 +45,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.21**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.22**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -103,9 +103,9 @@ console setting that hid those lines on laptops with a phantom serial port; that
 microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
-## Next release (not published yet)
+## What 0.2.22 changed
 
-Built and tested in QEMU, not yet released:
+Built and tested in QEMU:
 
 - **Binary install.** The installer adds [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) as a second binary host (signed, higher priority than Gentoo's),
   trusts its key the way `getuto` trusts Gentoo's, and unpacks the Portage tree snapshot the packages were built against instead of the day's tree. `make.conf` no longer sets this
@@ -130,7 +130,8 @@ Built and tested in QEMU, not yet released:
 - **Live image:** the look of the profile no longer pins the author's palette, wallpaper folder or niri colours; the Zen entry in the dock is the one that downloads the browser.
 
 Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
-the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
+the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GUI image is 765 MiB (0.2.21: 760), the minimal 523, the kernel store 248 (the generic builds are now configs for real hardware: NVMe/SATA built in, no virtio, so a VM disk must be NVMe or SATA).
+**Important for a public install:** the images carry no address for the kernel store (it has no fixed public URL yet): without `GENTOO_STORE_BINHOST_URL` / `GENTOO_STORE_OVERLAY_URL` the graphical installer says "store not configured". The binary packages and the Portage tree snapshot are public ([simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost)). **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
 screens), Secure Boot of the installed system under OVMF, any real hardware.
 
 ## What 0.2.21 changed
