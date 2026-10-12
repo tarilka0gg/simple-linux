@@ -116,7 +116,7 @@ Built and tested in QEMU:
   with percent and elapsed time, and the log is open and follows the newest line; it now includes what the commands print.
 - **`/` and `/home` on separate partitions.** After ESP and swap the system gets 20 % (40 % on a disk under 128 GiB, never under 20 GiB), `/home` the rest, so a full home cannot starve the system.
   On a disk with less than 40 GiB left after swap everything stays in root.
-- **The wallpaper's colours reach the programs.** niri's ring and borders, ghostty, btop, GTK 3/4 (with `adw-gtk3`), micro, tmux, fastfetch, GIMP; Noctalia starts after the wallpaper is chosen,
+- **The wallpaper's colours reach the programs.** niri's ring and borders, ghostty, btop, GTK 3/4 (with `adw-gtk3`), Qt programs (`qt6ct`, KDE colour scheme), yazi, fuzzel, Neovim, Zen, Telegram (the theme file is written, choosing it is one click in Telegram), micro, tmux, fastfetch, GIMP; Noctalia starts after the wallpaper is chosen,
   so there is no flash of the wrong theme. The installed system gets the same, with the project's wallpapers and a random one at every start. (`simple-linux-configs`: `apps/`, `noctalia/hooks/`.)
 - **Touchpads work.** The live kernel had only `I2C_HID_ACPI`: on a laptop whose touchpad hangs off the chipset's Serial IO I2C bus (the HP Victus' `SYNA32E3`, most
   laptops since about 2019) no input device appeared at all. It now has the Intel Serial IO (`MFD_INTEL_LPSS`, `I2C_DESIGNWARE`), GPIO (`PINCTRL` Intel and AMD), `HID_MULTITOUCH`, RMI4, Elan, THC/QuickI2C
@@ -131,7 +131,7 @@ Built and tested in QEMU:
 
 Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
 the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GUI image is 765 MiB (0.2.21: 760), the minimal 523, the kernel store 248 (the generic builds are now configs for real hardware: NVMe/SATA built in, no virtio, so a VM disk must be NVMe or SATA).
-**Important for a public install:** the images carry no address for the kernel store (it has no fixed public URL yet): without `GENTOO_STORE_BINHOST_URL` / `GENTOO_STORE_OVERLAY_URL` the graphical installer says "store not configured". The binary packages and the Portage tree snapshot are public ([simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost)). **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
+**Nothing has to be configured.** The kernels are the assets of the `kernels` release of [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) (ten builds and a `Packages` index), the packages and the Portage tree snapshot are there too, and the configs come from simple-linux-configs: all defaults of the installer (`GENTOO_STORE_BINHOST_URL` and the others only override them). A headless install from the released GUI image on an NVMe disk with only the disk and the user set took the kernel and packages from GitHub, compiled nothing, and the installed system booted to a login. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
 screens), Secure Boot of the installed system under OVMF, any real hardware.
 
 ## What 0.2.21 changed
