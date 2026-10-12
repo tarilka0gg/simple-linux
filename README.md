@@ -128,9 +128,13 @@ Built and tested in QEMU:
 - **Secure Boot for the installed system** (off by default): a key made on the machine, Limine and its config signed and pinned; the certificate is put in `/boot/secureboot/` to enrol.
   **`simple-linux-update`** updates the kernel (the old one stays as a boot entry) and runs `emerge` for the system.
 - **Live image:** the look of the profile no longer pins the author's palette, wallpaper folder or niri colours; the Zen entry in the dock is the one that downloads the browser.
+- **Live image, visible changes:** the installer starts after Noctalia has drawn the wallpaper, so it comes up in the wallpaper's colours; the overview shows the blurred wallpaper; Zen opens maximized; Portage Store is hidden (the live medium has no Portage tree);
+  the terminal prompt is [tide](https://github.com/IlanCosman/tide) in the palette's colours with a JetBrainsMono Nerd Font; the hostname is `simple-linux-live`; at start every monitor is set to its highest resolution and refresh rate
+  (real hardware only, not in a VM); the window is titled "Simple Linux Installer"; one wallpaper (the penguin with stripes) is removed.
+- **Smaller image:** build-only tools (cmake, cargo-c, ...), static libraries and development data are no longer in the live image (about 70 MiB).
 
 Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
-the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GUI image is 765 MiB (0.2.21: 760), the minimal 523, the kernel store 248 (the generic builds are now configs for real hardware: NVMe/SATA built in, no virtio, so a VM disk must be NVMe or SATA).
+the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GUI image is 698 MiB (0.2.21: 760), the minimal 493, the kernel store 248 (the generic builds are now configs for real hardware: NVMe/SATA built in, no virtio, so a VM disk must be NVMe or SATA).
 **Nothing has to be configured.** The kernels are the assets of the `kernels` release of [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) (ten builds and a `Packages` index), the packages and the Portage tree snapshot are there too, and the configs come from simple-linux-configs: all defaults of the installer (`GENTOO_STORE_BINHOST_URL` and the others only override them). A headless install from the released GUI image on an NVMe disk with only the disk and the user set took the kernel and packages from GitHub, compiled nothing, and the installed system booted to a login. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
 screens), Secure Boot of the installed system under OVMF, any real hardware.
 
