@@ -3,6 +3,10 @@
 A small Gentoo-based live system with its own installer. Two bootable images, the stage3 they
 install from, the kernel, and the desktop setup the GUI image boots into.
 
+**[Changelog](CHANGELOG.md)** · **[Releases](https://github.com/tarilka0gg/simple-linux/releases)** · **[Installer source](https://github.com/tarilka0gg/gentoo-installer)** · **[Binary packages](https://github.com/tarilka0gg/simple-linux-binhost)**
+
+![The live session: the installer, in the colours of the wallpaper](docs/img/0.2.22/welcome.png)
+
 The installer and the scripts that build all of this live in
 [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) (GPL-2.0-or-later). This repository
 holds what comes out of that build, and the parts that are configuration rather than code.
