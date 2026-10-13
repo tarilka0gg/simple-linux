@@ -4,6 +4,16 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.23
+
+Checked in QEMU (the live session, a terminal opened after closing the installer).
+
+- **fastfetch.** The Simple Linux snake is the logo: braille dots (26 rows carry the detail of ~100 rows of letters, so the art stays smaller than the text next to it), with eyes
+  and a red tongue. The OS line says `Simple Linux`, the title `user@simplelinux`. The modules are the author's own (OS, System Age, packages, WM, display, CPU, GPU, memory, `/` and `/home`, colours).
+  The snake keeps the terminal's own white and light black and takes only 10 % of the wallpaper's accent colour (`simple-linux-configs`: `noctalia/hooks/colors.d/20-fastfetch.sh`;
+  Noctalia's own fastfetch template, which recolours everything, is off).
+- **fastfetch in every terminal of the live image.** It runs at the first prompt and is cleared when the first command is typed, as in the author's own fish (`/etc/fish/conf.d/10-house.fish`).
+
 ## 0.2.22
 
 Built and tested in QEMU:
