@@ -30,7 +30,7 @@ and overlays stay available) and removes the first day:
 - **You can see and check it.** The images are signed (`SHA256SUMS.sig`), Secure Boot capable, and this repository is the configuration, not a blob.
 
 What it is not: not a binary distribution with its own repository of everything (anything outside Gentoo's binhost and this project's compiles on your machine),
-no disk encryption yet, no Microsoft-signed Secure Boot (an installed system can sign its own bootloader with a key made on that machine, see below), and **not yet confirmed on the author's own hardware** (see below). If you want a distro that is
+no disk encryption yet, no Microsoft-signed Secure Boot (an installed system can sign its own bootloader with a key made on that machine, see below), and still young: it **boots and installs on the author's real hardware**, but only a few machines have seen it (see below). If you want a distro that is
 finished and supported today, use one; if you want Gentoo without the first day, try this and report what happens.
 
 ## Downloads
@@ -49,7 +49,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 248 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.22**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.22** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -87,7 +87,7 @@ widget, or the TUI's network screen).
 Copy the `.iso` onto a Ventoy stick and pick it; since 0.2.15 the default (*Boot in normal mode*) works on BIOS and on UEFI, and
 *Boot in grub2 mode* works too (Ventoy then reads the image's `boot/grub/grub.cfg`, loads the kernel itself and makes the ISO visible
 to the live system). On 0.2.14 and older, *normal mode* on BIOS stopped with "Could not determine boot drive": use grub2 mode with
-those. Tested with Ventoy 1.1.17 in QEMU (BIOS and UEFI); not on real hardware. 0.2.0 and older had no `grub.cfg` and could not be
+those. Tested with Ventoy 1.1.17 in QEMU (BIOS and UEFI), and it boots from the author's Ventoy stick on real hardware. 0.2.0 and older had no `grub.cfg` and could not be
 started from Ventoy at all.
 
 ## If it does not start on your machine
@@ -104,49 +104,8 @@ Limine shows a menu for 3 seconds (Ventoy's GRUB mode: 5). Try the entries in th
 `[Firmware Bug]: TSC_DEADLINE disabled ... please update microcode` and `error -71` on some USB port are
 warnings on their own; if boot stops, the lines *after* them (use entry 4) say why. Early versions had a
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
-microcode now loads early. **No image has been run on real hardware by the author yet** - reports of what the verbose
+microcode now loads early. The images **boot and install on the author's real hardware**; other machines are untested, so reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
-
-## What 0.2.22 changed
-
-Built and tested in QEMU:
-
-- **Binary install.** The installer adds [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) as a second binary host (signed, higher priority than Gentoo's),
-  trusts its key the way `getuto` trusts Gentoo's, and unpacks the Portage tree snapshot the packages were built against instead of the day's tree. `make.conf` no longer sets this
-  machine's `CPU_FLAGS_X86` or an unusual `VIDEO_CARDS` in binary mode (they made Gentoo's binaries mismatch and Portage compiled `mesa`, `pixman`, ...), and a `cpuid2cpuflags` bug
-  that put the variable's name into the value is fixed. Packages are merged in parallel (`--jobs`). Optional groups state the USE they need (Qt `opengl`, `qml`, ...); `*/*::guru ~amd64`
-  fixes the install that stopped on `mangohud`'s GURU dependencies; `DONT_MOUNT_BOOT` fixes `linux-firmware` aborting in the chroot.
-- **The installer shows progress.** The Installing page lists every step (tick, spinner, cross, time taken), says what is happening now (a download in MB, "package 3 of 31"), has a bar
-  with percent and elapsed time, and the log is open and follows the newest line; it now includes what the commands print.
-- **`/` and `/home` on separate partitions.** After ESP and swap the system gets 20 % (40 % on a disk under 128 GiB, never under 20 GiB), `/home` the rest, so a full home cannot starve the system.
-  On a disk with less than 40 GiB left after swap everything stays in root.
-- **The wallpaper's colours reach the programs.** niri's ring and borders, ghostty, btop, GTK 3/4 (with `adw-gtk3`), Qt programs (`qt6ct`, KDE colour scheme), yazi, fuzzel, Neovim, Zen, Telegram (the theme file is written, choosing it is one click in Telegram), micro, tmux, fastfetch, GIMP; Noctalia starts after the wallpaper is chosen,
-  so there is no flash of the wrong theme. The installed system gets the same, with the project's wallpapers and a random one at every start. (`simple-linux-configs`: `apps/`, `noctalia/hooks/`.)
-- **Touchpads work.** The live kernel had only `I2C_HID_ACPI`: on a laptop whose touchpad hangs off the chipset's Serial IO I2C bus (the HP Victus' `SYNA32E3`, most
-  laptops since about 2019) no input device appeared at all. It now has the Intel Serial IO (`MFD_INTEL_LPSS`, `I2C_DESIGNWARE`), GPIO (`PINCTRL` Intel and AMD), `HID_MULTITOUCH`, RMI4, Elan, THC/QuickI2C
-  and sensor-hub drivers (+4.6 MiB image, all of them load in a VM; **the touchpad itself is not confirmed on real hardware yet**). The generic store kernels (x86-64 v2/v3) lacked them too and are rebuilt;
-  the Raptor Lake builds already had them.
-- **Ghostty takes the wallpaper's colours.** Its starting config also loads Noctalia's theme file as a `config-file`, which wins over colours set by hand, and the Noctalia start script
-  creates the ghostty config if a system lacks one.
-- **Enter works on the account page** (username, password, confirmation, Continue).
-- **Secure Boot for the installed system** (off by default): a key made on the machine, Limine and its config signed and pinned; the certificate is put in `/boot/secureboot/` to enrol.
-  **`simple-linux-update`** updates the kernel (the old one stays as a boot entry) and runs `emerge` for the system.
-- **Live image.** The look no longer pins the author's palette, wallpaper folder or niri colours: everything is generated from the wallpaper.
-  - The installer starts after Noctalia has drawn the wallpaper, so it comes up in the wallpaper's colours; it is titled "Simple Linux Installer".
-  - The bar floats (Noctalia 5.2 names its margins `margin_edge`/`margin_ends`; the old `margin_h`/`margin_v` were silently ignored) and uses the capsule layout; the overview shows the blurred wallpaper.
-  - Zen opens tiled and maximized, and its dock entry is the one that downloads the browser.
-  - Portage Store is in the launcher. On its first start it downloads the Portage tree snapshot (88 MB) and builds its search index; its category tiles follow the wallpaper palette. App icons come from Flathub, so only apps that exist there get one.
-  - The terminal prompt is [tide](https://github.com/IlanCosman/tide) in the palette's colours with a JetBrainsMono Nerd Font; the hostname is `simple-linux-live`.
-  - On real hardware every monitor is set to its highest resolution and refresh rate at start (not in a VM).
-  - One wallpaper (the penguin with stripes) is removed.
-- **Smaller image:** build-only tools (cmake, cargo-c, ...), static libraries, development data, phone/router-only Wi-Fi firmware and a second copy of the CPU microcode are no longer in the live image (about 125 MiB).
-
-Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
-the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GUI image is 636 MiB (0.2.21: 760), the minimal 434, the kernel store 248 (the generic builds are now configs for real hardware: NVMe/SATA built in, no virtio, so a VM disk must be NVMe or SATA).
-**Nothing has to be configured.** The kernels are the assets of the `kernels` release of [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) (ten builds and a `Packages` index), the packages and the Portage tree snapshot are there too, and the configs come from simple-linux-configs: all defaults of the installer (`GENTOO_STORE_BINHOST_URL` and the others only override them). A headless install from the released GUI image on an NVMe disk with only the disk and the user set took the kernel and packages from GitHub, compiled nothing, and the installed system booted to a login. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
-screens), Secure Boot of the installed system under OVMF, any real hardware.
-
-Earlier versions, and 0.2.22 with pictures: [CHANGELOG.md](CHANGELOG.md).
 
 ## What is in the images
 
@@ -182,7 +141,7 @@ on its own, and the created user logs in with fish, btrfs subvolumes and `/boot`
 
 The 0.2.0 install test: a console-only install (`GENTOO_INSTALLER_WM=none`) from the minimal image with a kernel from the store, interrupted at the base-system step, resumed to the end, and the installed disk booted to a login with the right `make.conf`.
 
-**Not tested: any real hardware.** Also not done: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build.
+**Real hardware:** boots and installs on the author's machine; nothing is known about others. Also not done or not confirmed: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build, but a working one.
 
 ## Licence
 
