@@ -36,13 +36,13 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 
 | File | Size | What it is |
 |---|---|---|
-| `simple-linux-minimal.iso` | 0.5 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 0.8 GB | the same plus a niri + Noctalia desktop, Zen, Thunar, GParted, PipeWire, with a graphical installer |
+| `simple-linux-minimal.iso` | 0.43 GB | text installer (TUI), rescue tools, firmware |
+| `simple-linux-gui.iso` | 0.64 GB | the same plus a niri + Noctalia desktop (floating bar, colours from the wallpaper), Zen (downloaded on first use), Thunar, GParted, Portage Store, PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
 | `simple-linux-stage3-amd64-openrc.tar.xz.sha512` | 170 B | its SHA-512, read by the installer |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
-| `simple-linux-kernel-store.tar` | 271 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
+| `simple-linux-kernel-store.tar` | 248 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
 Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.22**. Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
@@ -88,7 +88,7 @@ started from Ventoy at all.
 
 ## If it does not start on your machine
 
-Limine shows a menu for 5 seconds. Try the entries in this order and note which one works:
+Limine shows a menu for 3 seconds (Ventoy's GRUB mode: 5). Try the entries in this order and note which one works:
 
 1. **Simple Linux (live)** - the default, screen only, kernel and dracut messages visible.
 2. **USB workaround** - for `usb X-Y: device descriptor read/64, error -71`, the classic enumeration failure
@@ -127,10 +127,14 @@ Built and tested in QEMU:
 - **Enter works on the account page** (username, password, confirmation, Continue).
 - **Secure Boot for the installed system** (off by default): a key made on the machine, Limine and its config signed and pinned; the certificate is put in `/boot/secureboot/` to enrol.
   **`simple-linux-update`** updates the kernel (the old one stays as a boot entry) and runs `emerge` for the system.
-- **Live image:** the look of the profile no longer pins the author's palette, wallpaper folder or niri colours; the Zen entry in the dock is the one that downloads the browser.
-- **Live image, visible changes:** the installer starts after Noctalia has drawn the wallpaper, so it comes up in the wallpaper's colours; the overview shows the blurred wallpaper; Zen opens tiled and maximized; Portage Store is in the launcher and, on its first start, downloads the Portage tree snapshot (88 MB) and builds its search index (its category tiles follow the wallpaper palette; app icons come from Flathub and exist only for apps that are there); the bar floats (Noctalia 5.2 key names);
-  the terminal prompt is [tide](https://github.com/IlanCosman/tide) in the palette's colours with a JetBrainsMono Nerd Font; the hostname is `simple-linux-live`; at start every monitor is set to its highest resolution and refresh rate
-  (real hardware only, not in a VM); the window is titled "Simple Linux Installer"; one wallpaper (the penguin with stripes) is removed.
+- **Live image.** The look no longer pins the author's palette, wallpaper folder or niri colours: everything is generated from the wallpaper.
+  - The installer starts after Noctalia has drawn the wallpaper, so it comes up in the wallpaper's colours; it is titled "Simple Linux Installer".
+  - The bar floats (Noctalia 5.2 names its margins `margin_edge`/`margin_ends`; the old `margin_h`/`margin_v` were silently ignored) and uses the capsule layout; the overview shows the blurred wallpaper.
+  - Zen opens tiled and maximized, and its dock entry is the one that downloads the browser.
+  - Portage Store is in the launcher. On its first start it downloads the Portage tree snapshot (88 MB) and builds its search index; its category tiles follow the wallpaper palette. App icons come from Flathub, so only apps that exist there get one.
+  - The terminal prompt is [tide](https://github.com/IlanCosman/tide) in the palette's colours with a JetBrainsMono Nerd Font; the hostname is `simple-linux-live`.
+  - On real hardware every monitor is set to its highest resolution and refresh rate at start (not in a VM).
+  - One wallpaper (the penguin with stripes) is removed.
 - **Smaller image:** build-only tools (cmake, cargo-c, ...), static libraries, development data, phone/router-only Wi-Fi firmware and a second copy of the CPU microcode are no longer in the live image (about 125 MiB).
 
 Checked: headless installs in a VM (default groups and every group, 261 and 263 binary merges, nothing compiled), the installed system booting and starting niri on a virtual 3D GPU with
