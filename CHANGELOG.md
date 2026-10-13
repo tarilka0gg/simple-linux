@@ -8,31 +8,8 @@ Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simp
 
 Built and tested in QEMU:
 
-### In pictures
-
-![The installer, in the colours of the wallpaper](docs/img/0.2.22/welcome.png)
-*The installer starts after Noctalia has drawn the wallpaper, so it opens in the wallpaper's palette. Same image, other wallpaper: the colours follow.*
-
-![The same desktop with a different wallpaper](docs/img/0.2.22/two-wallpapers.png)
-
-![The Software page](docs/img/0.2.22/software.png)
-
-![Disk summary: / and /home](docs/img/0.2.22/partitions.png)
-*`/` and `/home` on separate partitions (here a 60 GiB disk: 40 % / 60 %).*
-
-![The installing page](docs/img/0.2.22/progress.gif)
-*The Installing page (simulated run): every step with its time, what is happening now, a progress bar and the live log.*
-
-![The floating bar](docs/img/0.2.22/bar.png)
-
-![The overview with the blurred wallpaper](docs/img/0.2.22/overview.png)
-
-![Terminal with the tide prompt and fastfetch](docs/img/0.2.22/terminal.png)
-
-![Portage Store](docs/img/0.2.22/portage-store.png)
-*Portage Store: category tiles in the wallpaper's palette; icons come from Flathub.*
-
-![Zen Browser, tiled](docs/img/0.2.22/zen.png)
+![The installer in the live session](docs/img/0.2.22/welcome.png)
+*The live session: the installer opens in the middle of the screen, in the colours of the wallpaper (Noctalia draws the wallpaper first, the installer starts after it).*
 
 - **Binary install.** The installer adds [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) as a second binary host (signed, higher priority than Gentoo's),
   trusts its key the way `getuto` trusts Gentoo's, and unpacks the Portage tree snapshot the packages were built against instead of the day's tree. `make.conf` no longer sets this
