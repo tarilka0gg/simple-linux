@@ -26,6 +26,8 @@ and overlays stay available) and removes the first day:
 - **A desktop that is ready.** niri + Noctalia whose colours follow the wallpaper (the terminal, GTK programs, btop, tmux, fastfetch and the niri
   borders too, through Noctalia's templates), PipeWire, Thunar, a browser that downloads itself, plus
   [ustan](https://github.com/tarilka0gg/ustan) for `.deb`, AppImage, Flatpak and `.exe` files and a graphical app store for Portage.
+  Terminal programs behave like desktop apps: micro gets a folder badge that opens a file picker in the same window, and btop, micro and tmux have launcher entries with
+  icons in the style of the rest (tui-shim). The launcher starts with the installer, the terminal, files and the browser on top.
 - **Every decision is a `git log`.** The installer commits what it wrote to `/etc/portage`, so "what did it do" and "undo it" are ordinary git.
 - **You can see and check it.** The images are signed (`SHA256SUMS.sig`), Secure Boot capable, and this repository is the configuration, not a blob.
 
@@ -41,7 +43,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | File | Size | What it is |
 |---|---|---|
 | `simple-linux-minimal.iso` | 0.43 GB | text installer (TUI), rescue tools, firmware |
-| `simple-linux-gui.iso` | 0.64 GB | the same plus a niri + Noctalia desktop (floating bar, colours from the wallpaper), Zen (downloaded on first use), Thunar, GParted, Portage Store, PipeWire, with a graphical installer |
+| `simple-linux-gui.iso` | 0.64 GB | the same plus a niri + Noctalia desktop (floating bar, colours from the wallpaper), Zen (downloaded on first use), Thunar, GParted, Portage Store, tui-shim (file picker and launchers for terminal programs), PipeWire, with a graphical installer |
 | `simple-linux-stage3-amd64-openrc.tar.xz` | 240 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
 | `simple-linux-stage3-amd64-openrc.tar.xz.sha512` | 170 B | its SHA-512, read by the installer |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
@@ -49,7 +51,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 248 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.23** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.24** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 
@@ -115,7 +117,7 @@ entry prints on a failing machine are the most useful thing you can send.
   microcode; `xfsprogs`, `ntfs-3g`, `exfatprogs`, `f2fs-tools`, `cryptsetup`, `lvm2`, `mdadm`, `testdisk`,
   `ddrescue`, `smartmontools`, `nvme-cli`, `hdparm`, `usbutils`, `dmidecode`, `htop`, `tmux`, `screen`, `tcpdump`, `nmap`, `gptfdisk`, `iw`, `wpa_supplicant`, `Memtest86+`, ….
 - **GUI image only**: niri 26.04, Noctalia 5.2.1, ustan (with its menu entry; the minimal image has the `ustan` command), Zen Browser (downloaded on first use), Thunar (gvfs, tumbler), GParted, PipeWire +
-  WirePlumber, ghostty, `btop`, `imv`, `wl-clipboard`.
+  WirePlumber, ghostty, `btop`, `imv`, `wl-clipboard`, `grim`, tui-shim.
 - Package lists (`category/name-version`, from the image's package database): `packages/minimal.txt`,
   `packages/gui.txt`. They include packages that were needed to *build* the image; their compilers, headers
   and documentation were left out of the squashfs, so the list is longer than what is on disk.

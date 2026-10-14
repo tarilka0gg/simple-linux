@@ -4,6 +4,26 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.24
+
+Checked in QEMU: the live session (terminal, launcher order and icons, micro with the picker badge, wallpaper colours) and a headless install of the GUI image on an NVMe disk (a generic kernel, packages from the binhost,
+nothing compiled) that booted to a login; there the copied `tui-shim`, its micro shim, the launcher entries and the palette were all in place. **Not checked:** the installed desktop on screen: the generic kernels have no
+virtual GPU driver (as in 0.2.22 and 0.2.23), so niri starts but a VM shows only the console; the graphical wizard end to end; the minimal image.
+
+- **tui-shim is in the GUI image** (`/usr/bin/tui-shim`, built from its ebuild; `grim` comes with it). In a terminal, plain `micro` gets a round folder badge in the window's corner; clicking it
+  (or F9) opens a file picker, and the chosen file opens in the same editor window. At the first prompt of every user fish sets it up once, in the background: `tui-shim shims install`
+  and `tui-shim sync --no-theme` (launcher entries with icons for btop, micro, tmux, ...). The installer copies the binary to `/usr/local/bin` of the installed system when the desktop has libadwaita and gtk4-layer-shell.
+- **Colours follow the wallpaper.** btop and yazi stay coloured by Noctalia (`tui-shim sync --no-theme`). micro, whose Noctalia template is a download that is not in the image, gets a scheme
+  made from the same palette, and the file picker uses it too: `noctalia/hooks/colors.d/30-tui-shim.sh` rewrites `~/.config/tui-shim/palette.md` from Noctalia's ghostty theme at every palette change
+  (a dark starting palette is in `apps/tui-shim`).
+- **Launcher icons.** The entries tui-shim makes (micro, btop, tmux, "Edit in terminal", "TUI app versions") are line drawings in the style of the other icons. Theme icons were black squares in
+  Noctalia's launcher, because it recolours a coloured, filled icon into one flat colour. The drawings are redrawn in the new palette when it changes (`TUI_SHIM_LINE_ICONS`).
+- **Launcher order.** Noctalia lists apps by how often they were started and the rest alphabetically; a fresh image had no counts, so btop and "Edit in terminal" came first. The image now starts with counts
+  that put the installer, Ghostty, Thunar, Zen, Portage Store, ustan and GParted first and the terminal programs after them (`usage_counts.json`); real use takes over from there.
+- `~/.local/bin` comes first in fish's `PATH` in every terminal, so the shims win over `/usr/bin/micro`.
+- **fastfetch:** a compact 13-row braille snake is used in terminals smaller than 100x32; the big one otherwise. The logo is no longer garbled when the terminal window is still being sized at start.
+- `grim` is in the installer's *Desktop utilities* group.
+
 ## 0.2.23
 
 Checked in QEMU (the live session, a terminal opened after closing the installer).
