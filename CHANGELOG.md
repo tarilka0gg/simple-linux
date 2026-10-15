@@ -4,6 +4,23 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.25
+
+Two new images, **`simple-linux-gui-offline.iso`** (1.8 GiB) and **`simple-linux-minimal-offline.iso`** (1.6 GiB), that install **without a network**. The other two images, the stage3 and the kernel files are as before
+(the installer in all four understands the offline medium).
+
+- **What is on an offline medium** (outside the squashfs, next to the stage3): the kernel store, the binary packages of both binary hosts (322 from Gentoo's, 64 from this project's, their indexes cut down to those files), the Portage tree
+  snapshot, the desktop configuration, and the source archives of the two packages that have no binary. The installer serves that directory to itself on `127.0.0.1` and points the kernel store, both binary hosts, the tree, the configs and
+  `GENTOO_MIRRORS` at it, so Portage, git and wget inside the new system work as always (`installer-core/src/offline.rs`, `iso/make-offline.sh`). The network step of the wizard is skipped. When the install is done the new system's
+  `binrepos.conf` and `make.conf` are put back to the public addresses.
+- **What it covers.** The default software groups with the niri desktop and a GPU driver that is open source (Intel, AMD, Xe, Nouveau, none). **Not on the medium:** the groups Zen browser, Dev, Media, Graphics, Chat, Office and Gaming (together ~700 MB:
+  GitHub takes no file over 2 GiB), the proprietary NVIDIA driver (it is built from source against the kernel) and other desktops than niri. They are not offered when installing from an offline image; install them on the finished system, with a network.
+- **`linux-firmware` is cut down** on the offline images: 609 MB become 127 MB by dropping what real hardware seldom has (phones' Qualcomm, NVIDIA's, server NICs, Intel QAT/ICE/VPU, a few Atheros chips). GPU (Intel, AMD, Radeon), Wi-Fi and Bluetooth (Intel, Realtek, MediaTek,
+  Atheros, Broadcom), audio and common Ethernet are kept. The tree snapshot on the medium carries the Manifest line of the cut archive. `emerge -1 sys-kernel/linux-firmware` on a networked system brings back the complete set.
+- **Checked in QEMU with the outside network blocked** (only the log port reachable): a headless install of the GUI offline image from partitioning to the bootloader (stage3, kernel, 322+64 packages, the desktop, ustan, Portage Store and tui-shim copied),
+  and the installed system booted to a login. The minimal offline image boots, finds the payload and goes straight to the disk screen. **Not checked:** an install from the minimal offline image end to end, the graphical wizard on the offline image,
+  real hardware, and the installed desktop on screen in a VM (no virtual GPU driver in the generic kernels, as before).
+
 ## 0.2.24
 
 Checked in QEMU: the live session (terminal, launcher order and icons, micro with the picker badge, wallpaper colours) and a headless install of the GUI image on an NVMe disk (a generic kernel, packages from the binhost,
