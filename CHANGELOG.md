@@ -4,6 +4,15 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.26
+
+A fix for the desktop of all four images; nothing else changed (the installer, the kernels and the stage3 are the 0.2.25 ones).
+
+- **The colours follow the wallpaper again after the first prompt.** The images carry the author's saved Noctalia config, and in it the `colors_changed` hook was commented out, so `hooks/colors.d/*.sh` never ran after a wallpaper
+  change: tui-shim's palette (`~/.config/tui-shim/palette.md`), micro's colour scheme and the line icons kept the colours of the first start while Noctalia's own templates (ghostty, btop, niri) changed. `prepare-rootfs.sh` now registers
+  `started` and `colors_changed` in the config whatever its source. Checked in a VM with the 0.2.25 image: after `noctalia msg wallpaper-random` with the hook line added, `palette.md` and micro's scheme were rewritten 0.4 s after the new
+  ghostty theme (before, they kept the time of the first start). A micro that is already open keeps its colours until it is restarted.
+
 ## 0.2.25
 
 Two new images, **`simple-linux-gui-offline.iso`** (1.8 GiB) and **`simple-linux-minimal-offline.iso`** (1.6 GiB), that install **without a network**. The other two images, the stage3 and the kernel files are as before
