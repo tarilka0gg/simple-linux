@@ -4,9 +4,9 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
-## Unreleased (0.2.27)
+## 0.2.27
 
-Installer work that is pushed to [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) but is **in no image yet**.
+A new installer in all four images (and the offline payload, the stage3 and the kernel files unchanged from 0.2.26). Everything below was checked in QEMU, not on real hardware; what was not checked is said in each item.
 
 - **Install next to other systems.** The disk page can use the free space of a GPT disk instead of erasing it: you pick how many GiB to give, the existing EFI partition is mounted (never
   formatted), Windows and other distros found on it appear in the Limine menu, and the installer registers its own UEFI boot entry. GParted is offered for making room. Checked in a VM with
