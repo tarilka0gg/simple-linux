@@ -4,6 +4,22 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## Unreleased (0.2.27)
+
+Installer work that is pushed to [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) but is **in no image yet**.
+
+- **Install next to other systems.** The disk page can use the free space of a GPT disk instead of erasing it: you pick how many GiB to give, the existing EFI partition is mounted (never
+  formatted), Windows and other distros found on it appear in the Limine menu, and the installer registers its own UEFI boot entry. GParted is offered for making room. Checked in a VM with
+  a disk holding fake Windows/Ubuntu loaders: they stayed intact, the menu listed them, the new system booted. Not yet checked: the graphical flow end to end, booting the other systems.
+- **Several keyboard layouts** with a switch key (Caps Lock by default), applied to the running desktop at once on the live medium and written into the installed niri; **time zone search** by city,
+  capital or country, and the zone found from the connection in the background (not on offline images).
+- **Graphics page:** cards listed by name (vendor, model, integrated or discrete), a choice of the card the desktop is drawn on, the driver list folded into one row (it no longer covers the Continue
+  button). The Optimization page is one list of switches; the disk, confirm and Wi-Fi pages scroll.
+- **Optional kernel for this computer** (Advanced, Optimization; off by default): when the store has no kernel for exactly the hardware, the installer builds one from the
+  [kernel-matrix](https://github.com/tarilka0gg/kernel-matrix) on the new system and keeps the generic kernel if the build fails. Checked in a VM (built, booted); the clang fallback and the NVIDIA path are not.
+- **Fixes:** a resumed install uses the layout the first run made; the installed system is called `simple-linux`, not `gentoo`; the installer says "Simple Linux" instead of "Gentoo"; `simple-linux-update` keeps other
+  systems' entries in `limine.conf` and leaves a kernel built on the machine alone; block devices of 0 B are not listed as disks.
+
 ## 0.2.26
 
 A fix for the desktop of all four images; nothing else changed (the installer, the kernels and the stage3 are the 0.2.25 ones).

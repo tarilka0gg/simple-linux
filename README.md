@@ -138,12 +138,13 @@ entry prints on a failing machine are the most useful thing you can send.
 
 ## What has and has not been tested
 
-Tested, in QEMU/KVM: both ISOs boot on BIOS and UEFI, as a CD and as a USB stick (minimal); the GUI image
-reaches the niri session with the installer, Thunar, Zen and PipeWire running on a virtual 3D GPU; a full
-headless install from the minimal image onto a blank virtual disk, after which the installed system boots
-on its own, and the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed. (Later, for the next release: full installs with every software group, a bare desktop booting on a virtio-gpu, `/` and `/home` on their own partitions.)
+Tested, in QEMU/KVM: all four images boot on BIOS and UEFI (as a CD, and the minimal one as a USB stick); the GUI image reaches the niri session with the installer, Thunar, Zen and PipeWire running on a
+virtual 3D GPU; full headless installs from the minimal image onto a blank virtual disk (default and every software group, all binary packages), after which the installed system boots on its own and
+the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed; a console-only install interrupted at the base-system step and resumed to the end; and, for the offline
+images, a full install of the GUI offline image with the outside network blocked. The generic kernels have no virtual-GPU driver, so a *picture* of the installed desktop was not seen in a VM.
 
-The 0.2.0 install test: a console-only install (`GENTOO_INSTALLER_WM=none`) from the minimal image with a kernel from the store, interrupted at the base-system step, resumed to the end, and the installed disk booted to a login with the right `make.conf`.
+Work for the next release (see the *Unreleased* section of [CHANGELOG.md](CHANGELOG.md): install next to other systems, several keyboard layouts, time zone search, an optional kernel built on the
+machine) was checked in a VM only, headless.
 
 **Real hardware:** boots and installs on the author's machine; nothing is known about others. Also not done or not confirmed: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build, but a working one.
 
