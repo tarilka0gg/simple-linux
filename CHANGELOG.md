@@ -4,6 +4,16 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.29
+
+Smaller images again. Only what the live system carries changes; the installer, the offline payload, the stage3 and the kernel files are the ones of 0.2.28. Checked in QEMU, not on real hardware: the minimal image boots and runs git, tcpdump and the installer without the removed tools; the GUI image boots to the niri desktop (Noctalia bar and dock, a terminal, the installer window) on software rendering.
+
+- **Sizes** (0.2.28 → 0.2.29): GUI 592 → 560 MiB, minimal 387 → 369 MiB, GUI offline 1782 → 1750 MiB, minimal offline 1576 → 1558 MiB.
+- **LLVM built for the CPUs a PC uses only** (X86 and AMDGPU, not AArch64, RISC-V, WebAssembly and the other 17 targets): `libLLVM`, which Mesa's software renderer and radeonsi load, is 107 MiB instead of 154 MiB.
+- **Parts of packages instead of whole packages:** `git` is built without Perl, Python and GnuPG, `tcpdump` without libsmi (its 17 MiB of MIB files).
+- **No build or documentation tools on the medium:** Perl and every Perl script, autoconf, automake, libtool, bison, flex, m4, nasm, vala, sassc, the mail client, man-db, groff, texinfo, mandoc, lld and mesa_clc, plus fish's developer tools (`fish_indent`, `fish_key_reader`) and hwdata's MAC-vendor lists. `iso/slim-excludes.py` makes the list and refuses to build when a program that stays still needs a library it would drop (it found that ghostty needs glslang, so that stays).
+- Not checked: an install from these images, the offline images booting (only their size), and Perl-dependent scripts beyond the ones used in the checks.
+
 ## 0.2.28
 
 Smaller images and the right name. The installer is rebuilt for the name change; the offline payload, the stage3 and the kernel files are the ones of 0.2.27. Checked in QEMU, not on real hardware: the minimal image boots to the installer and the shell, the GUI image boots to the desktop.
