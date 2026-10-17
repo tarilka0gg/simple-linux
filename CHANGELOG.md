@@ -4,6 +4,14 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.28
+
+Smaller images and the right name. The installer is rebuilt for the name change; the offline payload, the stage3 and the kernel files are the ones of 0.2.27. Checked in QEMU, not on real hardware: the minimal image boots to the installer and the shell, the GUI image boots to the desktop.
+
+- **The system calls itself Simple Linux.** `/etc/os-release` says `Simple Linux` on the live medium and on every installed system, so Noctalia's System panel, fastfetch and similar tools stop saying "Gentoo". `ID` stays `gentoo`, because tools that read it mean the package base.
+- **About 45 MB less in each image** (GUI 637 → 592 MiB, minimal 434 → 387 MiB, the offline ones shrink the same way). The live system no longer carries what it never uses: the compiler and binutils (the installer builds the kernel inside the *installed* system, which has its own), the GRUB files (the boot loader is Limine), and firmware for hardware no PC with a screen has (SDIO and SoC Wi-Fi boards, server NICs and storage adapters, TV and capture cards, ISA/PCMCIA-era devices, serial adapters, ADSL modems). `os-prober`, Python for `equery`, and the Wi-Fi, GPU, Bluetooth and audio firmware stay.
+- Not checked: an install from these images, and the GUI installer's pages after the size cuts.
+
 ## 0.2.27
 
 A new installer in all four images (and the offline payload, the stage3 and the kernel files unchanged from 0.2.26). Everything below was checked in QEMU, not on real hardware; what was not checked is said in each item.
