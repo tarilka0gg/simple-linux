@@ -4,6 +4,17 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.32
+
+Sizes (0.2.31 → 0.2.32): GUI 513 → 514 MiB, minimal 361 → 362 MiB, GUI offline 1703 → 1704 MiB, minimal offline 1551 → 1552 MiB. Checked in QEMU, not on real hardware: the finished GUI ISO booted headless, SSH was tried against it (below), and its installer's Software page was opened in the live session and looked at. Headless installs of the minimal flavor and on legacy BIOS ran to the end; a UEFI install and a GUI-flavor install were not repeated with these final images.
+
+- **Flavors and mix-ins, like Funtoo's `epro`.** A system is one flavor (`minimal`, `desktop`, `workstation`, and `live` for this image) plus mix-ins (16 software groups, 6 graphics cards). The data lives in `profiles/` of gentoo-installer and is compiled into the installer; the new `slp` command (`show`, `list`, `info`, `init`, `flavor`, `mix-in`, `apply`, `rebuild`, `install`) changes it on an installed system and writes the Portage files that go with it (`package.use`, `package.accept_keywords`, `package.license`, the set `@slp`). Both installers have a flavor choice; headless installs read `GENTOO_INSTALLER_FLAVOR`. The live image is built from the `live` flavor.
+- **Software page with descriptions and screenshots.** One scrolling page: the flavor, then groups that expand to the packages in them, each with a description (all 70 packages) and, for 11 of them, a screenshot shipped inside the installer. Apps that are not in the live image have no screenshot.
+- **Opt-in SSH in the live session.** `sshd` starts only when a key is found: an `authorized_keys` file on a volume labelled `SIMPLE_SSH`, or `ssh/authorized_keys` on the live medium. Keys only: password and keyboard-interactive logins are off. Checked: with the key disk the right key logs in, a password and another key are refused; without it nothing listens on port 22. Not found why the same test never answered in the virtual-GPU (GL) VM; the headless one works.
+- **Fixed: the kernel build ran on every online install** in 0.2.27–0.2.31, not only when it was asked for. It now runs only when chosen (`GENTOO_INSTALLER_KERNEL_BUILD=1` or the page's option).
+- **Fixed: installs on legacy BIOS (GPT disks)** failed for lack of a BIOS boot partition; the installer now makes a 1 MiB one at the end of the disk. Not covered: BIOS together with the "next to what is there" free-space placement, which makes no BIOS boot partition.
+- Known noise: the live console prints "user.tester failed to start"; AMD graphics without LLVM is still untested.
+
 ## 0.2.31
 
 Smaller again; the installer, the offline payload, the stage3, the kernel files and the Zen profile are those of 0.2.30. Sizes (0.2.30 → 0.2.31): GUI 560 → 513 MiB, minimal 369 → 361 MiB, GUI offline 1750 → 1703 MiB, minimal offline 1558 → 1551 MiB. Checked in QEMU, not on real hardware: the minimal image booted with the tools below; a test image built from the same GUI tree was run on the virtual GPU (niri and Noctalia up, a wallpaper set, a terminal opened, the installer window shown). The finished GUI ISO itself was not booted.
