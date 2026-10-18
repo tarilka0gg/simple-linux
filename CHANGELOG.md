@@ -4,6 +4,16 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.33
+
+More software to choose from in the installer, nothing else changes in the live system. Sizes (0.2.32 → 0.2.33): GUI 514 → 517 MiB, minimal 362 → 363 MiB, GUI offline 1704 → 1706 MiB, minimal offline 1552 → 1553 MiB. Checked in QEMU, not on real hardware: the GUI image booted and its Software page lists the new groups; the packages below were installed in a Gentoo chroot and started in the live GUI session. An install of the new groups with the installer itself was not run.
+
+- **Four new software groups** on the Software page: **Steam**, **Minecraft** (PineconeMC, the Prism Launcher fork with Ely.by accounts), **Creative Craft apps** (PhotoCraft, LightCraft, VectorCraft, DesignCraft, FilmCraft, EffectCraft) and **Craft office apps** (WordCraft, GridCraft, DeckCraft, PdfCraft). The Craft apps are the open-source programs of the ArtCraft project (Apache-2.0 or MIT): early versions, and they run on the CPU where there is no usable graphics card.
+- **Their own overlay.** Portage has none of these programs (except Steam, which is in the `steam-overlay`), so the installer carries a small overlay, `slp-local`, with ebuilds that install the ready-made releases from GitHub, pinned by checksum; Steam's overlay is cloned from git. Ticking Steam is the acceptance of Valve's licence.
+- **Steam rebuilds some packages for 32-bit** (util-linux, fontconfig, expat, Mesa...), so the installer runs `emerge --changed-use` when a group asks for 32-bit libraries. The dependency plan resolves (about 310 packages on a minimal system); **Steam itself was not installed or started.**
+- **Screenshots** for Telegram, GIMP, mpv, VLC, LibreOffice, PineconeMC and the ten Craft apps on the Software page (27 in all).
+- These groups are not on the offline images (they download); the binhost build leaves them out.
+
 ## 0.2.32
 
 Sizes (0.2.31 → 0.2.32): GUI 513 → 514 MiB, minimal 361 → 362 MiB, GUI offline 1703 → 1704 MiB, minimal offline 1551 → 1552 MiB. Checked in QEMU, not on real hardware: the finished GUI ISO booted headless, SSH was tried against it (below), and its installer's Software page was opened in the live session and looked at. Headless installs of the minimal flavor and on legacy BIOS ran to the end; a UEFI install and a GUI-flavor install were not repeated with these final images.
