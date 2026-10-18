@@ -4,6 +4,15 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.31
+
+Smaller again; the installer, the offline payload, the stage3, the kernel files and the Zen profile are those of 0.2.30. Sizes (0.2.30 → 0.2.31): GUI 560 → 513 MiB, minimal 369 → 361 MiB, GUI offline 1750 → 1703 MiB, minimal offline 1558 → 1551 MiB. Checked in QEMU, not on real hardware: the minimal image booted with the tools below; a test image built from the same GUI tree was run on the virtual GPU (niri and Noctalia up, a wallpaper set, a terminal opened, the installer window shown). The finished GUI ISO itself was not booted.
+
+- **No LLVM in the GUI image.** Mesa is built without it (`USE=-llvm`): the AMD driver (radeonsi) compiles with its own compiler (ACO), and software OpenGL is `softpipe` instead of `llvmpipe`; the 107 MiB `libLLVM` is gone (27 MiB compressed), together with the SPIR-V helpers and clang. A machine with no usable graphics card still gets the graphical installer in its fallback window. **Not tested on an AMD graphics card, only on the virtual GPU.**
+- **Portage's saved build environments** (`environment.bz2`, 12 MiB, already compressed) are left out: only `emerge -C` reads them.
+- **Noctalia's default wallpaper** (a 5 MiB PNG) is left out; the live image sets its own wallpaper at every start.
+- `iso/slim-excludes.py` refuses to build if a program that stays still needs a library it would drop, so a Mesa that still wanted LLVM cannot ship by accident.
+
 ## 0.2.30
 
 Zen Browser in the live session comes ready; nothing else changes (the installer, the offline payload, the stage3, the kernel files and the image sizes are those of 0.2.29: GUI 560 MiB, minimal 369 MiB, GUI offline 1750 MiB, minimal offline 1558 MiB). The GUI tree these images are made from was started in QEMU and Zen was opened in it with the profile below (the finished GUI ISO itself was not booted); the minimal image was booted and runs as before.
