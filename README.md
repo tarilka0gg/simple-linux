@@ -18,11 +18,14 @@ and overlays stay available) and removes the first day:
 
 - **A real installer, with a graphical one.** Partitioning, locale and time zone (guessed from the keyboard layout), user, desktop, software groups
   and GPU driver are choices in a wizard; a failed install can be **resumed** from where it stopped instead of started over.
+- **Flavors and software groups, like Funtoo's profiles.** Choose `minimal`, `desktop` or `workstation` and tick groups (office, media, development,
+  gaming, Steam, Minecraft, the open-source Craft creative apps...) on a page that shows what each program is and, for many, a screenshot. The same choice
+  is kept on the installed system and changed with the `slp` command. Details in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 - **A kernel built for your hardware, not compiled on it.** The installer detects CPU generation, GPU vendor and laptop/desktop, and copies the matching prebuilt kernel
   from the store (a generic x86-64 v2/v3 build when nothing more specific exists).
 - **A binary install.** The packages come prebuilt: from Gentoo's own binhost, and from [this project's own](https://github.com/tarilka0gg/simple-linux-binhost)
   for what Gentoo does not build (niri, Noctalia, ghostty, the packages whose USE the installer changes), signed and built against the same Portage
-  tree snapshot the installer unpacks. A full install, desktop and all software groups, merged 263 packages in a VM and compiled none (about 15 minutes).
+  tree snapshot the installer unpacks. A full install, desktop and the software groups that existed at 0.2.31, merged 263 packages in a VM and compiled none (about 15 minutes); the Steam, Minecraft and Craft groups added later download their programs and Steam compiles 32-bit libraries.
 - **A desktop that is ready.** niri + Noctalia whose colours follow the wallpaper (the terminal, GTK programs, btop, tmux, fastfetch and the niri
   borders too, through Noctalia's templates), PipeWire, Thunar, a browser that downloads itself, plus
   [ustan](https://github.com/tarilka0gg/ustan) for `.deb`, AppImage, Flatpak and `.exe` files and a graphical app store for Portage.
@@ -139,7 +142,7 @@ entry prints on a failing machine are the most useful thing you can send.
 ## What has and has not been tested
 
 Tested, in QEMU/KVM: all four images boot on BIOS and UEFI (as a CD, and the minimal one as a USB stick); the GUI image reaches the niri session with the installer, Thunar, Zen and PipeWire running on a
-virtual 3D GPU; full headless installs from the minimal image onto a blank virtual disk (default and every software group, all binary packages), after which the installed system boots on its own and
+virtual 3D GPU; full headless installs from the minimal image onto a blank virtual disk (default and every software group of 0.2.31, all binary packages), after which the installed system boots on its own and
 the created user logs in with fish, btrfs subvolumes and `/boot` mounted, `doas` installed; a console-only install interrupted at the base-system step and resumed to the end; and, for the offline
 images, a full install of the GUI offline image with the outside network blocked. The generic kernels have no virtual-GPU driver, so a *picture* of the installed desktop was not seen in a VM.
 
