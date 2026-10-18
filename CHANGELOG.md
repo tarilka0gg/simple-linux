@@ -4,6 +4,12 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## Unreleased (0.2.30)
+
+Not in any image yet.
+
+- **Zen Browser in the live session starts from a fresh, ready profile every time**: DuckDuckGo as the search engine, uBlock Origin, SponsorBlock, CanvasBlocker and LocalCDN installed from addons.mozilla.org, DNS over HTTPS (Quad9), HTTPS-only mode and tracking protection, and settings that spend less RAM and CPU (no site isolation, two content processes, no disk cache, a 64 MB memory cache). None of the author's own Zen layout (compact mode, tab side, mods) is in it. Checked with the real Zen 1.23.3b in an isolated profile: the extensions install and run, the preferences and policies apply, the profile is left alone while Zen runs and made new when it starts again. Not checked inside a live image.
+
 ## 0.2.29
 
 Smaller images again. Only what the live system carries changes; the installer, the offline payload, the stage3 and the kernel files are the ones of 0.2.28. Checked in QEMU, not on real hardware: the minimal image boots and runs git, tcpdump and the installer without the removed tools; the GUI image boots to the niri desktop (Noctalia bar and dock, a terminal, the installer window) on software rendering.
