@@ -4,9 +4,9 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
-## Unreleased (0.2.30)
+## 0.2.30
 
-Not in any image yet.
+Zen Browser in the live session comes ready; nothing else changes (the installer, the offline payload, the stage3, the kernel files and the image sizes are those of 0.2.29: GUI 560 MiB, minimal 369 MiB, GUI offline 1750 MiB, minimal offline 1558 MiB). The GUI image was started in QEMU and Zen was opened in it with the profile below; the minimal image boots as before.
 
 - **Zen Browser in the live session starts from a fresh, ready profile every time**: DuckDuckGo as the search engine; uBlock Origin, SponsorBlock, CanvasBlocker and LocalCDN installed from addons.mozilla.org; DNS over HTTPS (Quad9), HTTPS-only mode and tracking protection; settings that spend less RAM and CPU (no site isolation, two content processes, no disk cache, a 64 MB memory cache); and the author's Zen layout, tabs on the right and no compact mode, with the nine Zen mods Zen downloads itself from its mod store at the first start (Quietify, Left close button, No Top Sites, Floating Status Bar, Better CtrlTab Panel, Tidy Popup, Cleaned URL bar, NoHighlightSplit, Add new tab urlbar icon). Checked with the real Zen 1.23.3b in an isolated profile: the extensions install and run, the preferences and policies apply, the mods are downloaded and their style sheet is built, the profile is left alone while Zen runs and made new when it starts again. The welcome pages the extensions open on their first install are closed again, Zen's "What's new" notice is switched off, and the extension buttons sit in the extensions panel, not on the toolbar. Not checked inside a live image, nor how the layout sits with the live session's window rules (the niri rule keeps Zen maximized).
 
