@@ -4,6 +4,12 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.34
+
+One change in the installer; the rest of the image is that of 0.2.33 (GUI 516 → 517 MiB). Checked in QEMU: the Software page was opened in the live session and a screenshot enlarged by a click.
+
+- **Click a program's screenshot on the Software page to see it full-size.** It opens at its own size in a window over the installer; Esc or a click on it closes it. The pointer turns into a zoom cursor over a picture.
+
 ## 0.2.33
 
 More software to choose from in the installer, nothing else changes in the live system. Sizes (0.2.32 → 0.2.33): GUI 514 → 517 MiB, minimal 362 → 363 MiB, GUI offline 1704 → 1706 MiB, minimal offline 1552 → 1553 MiB. Checked in QEMU, not on real hardware: the GUI image booted and its Software page lists the new groups; the packages below were installed in a Gentoo chroot and started in the live GUI session. An install of the new groups with the installer itself was not run.
