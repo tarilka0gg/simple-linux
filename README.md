@@ -17,23 +17,23 @@ What the GUI image boots into (screenshots of 0.2.33, taken in a virtual machine
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/live-desktop.png" alt="The desktop" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/live-launcher.png" alt="Launcher" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/live-desktop.png"><img src="docs/img/0.2.33/live-desktop.png" alt="The desktop" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/live-launcher.png"><img src="docs/img/0.2.33/live-launcher.png" alt="Launcher" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>The desktop</b><br><sub>niri with the Noctalia bar and dock, in the colours of the wallpaper.</sub></td>
     <td><b>Launcher</b><br><sub>Install Simple Linux, Ghostty, Thunar, Zen Browser, Portage Store and more.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/live-terminal.png" alt="Terminal" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/live-windows.png" alt="Tiling" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/live-terminal.png"><img src="docs/img/0.2.33/live-terminal.png" alt="Terminal" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/live-windows.png"><img src="docs/img/0.2.33/live-windows.png" alt="Tiling" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Terminal</b><br><sub>Ghostty with fish and fastfetch.</sub></td>
     <td><b>Tiling</b><br><sub>Thunar and btop side by side in niri's scrolling columns.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/live-browser.png" alt="Browser" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/live-browser.png"><img src="docs/img/0.2.33/live-browser.png" alt="Browser" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Browser</b><br><sub>Zen Browser, ready to use, with DuckDuckGo.</sub></td>
@@ -46,47 +46,47 @@ The graphical installer of the GUI image, page by page.
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/01-welcome.png" alt="Welcome" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/02-keyboard.png" alt="Keyboard layouts" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/01-welcome.png"><img src="docs/img/0.2.33/01-welcome.png" alt="Welcome" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/02-keyboard.png"><img src="docs/img/0.2.33/02-keyboard.png" alt="Keyboard layouts" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Welcome</b><br><sub>The installer's first screen: disk, kernel and boot are decided for you.</sub></td>
     <td><b>Keyboard layouts</b><br><sub>Add every layout you type; the first is the main one, and a box lets you test them.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/03-timezone.png" alt="Time zone" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/04-desktop.png" alt="Desktop" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/03-timezone.png"><img src="docs/img/0.2.33/03-timezone.png" alt="Time zone" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/04-desktop.png"><img src="docs/img/0.2.33/04-desktop.png" alt="Desktop" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Time zone</b><br><sub>Search for a city, capital or country, or let the internet connection tell.</sub></td>
     <td><b>Desktop</b><br><sub>Pick a compositor (niri, Hyprland, Sway, Labwc, MangoWC, dwl); Noctalia comes with any of them.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/05-graphics.png" alt="Graphics driver" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/06-software.png" alt="Software" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/05-graphics.png"><img src="docs/img/0.2.33/05-graphics.png" alt="Graphics driver" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/06-software.png"><img src="docs/img/0.2.33/06-software.png" alt="Software" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Graphics driver</b><br><sub>The cards found; the choice picks the kernel build and, for NVIDIA, whether the proprietary driver is compiled.</sub></td>
     <td><b>Software</b><br><sub>A system type (console, desktop, workstation) and groups of programs to tick.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/07-software-expanded.png" alt="A group opened" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/08-build-options.png" alt="Build options" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/07-software-expanded.png"><img src="docs/img/0.2.33/07-software-expanded.png" alt="A group opened" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/08-build-options.png"><img src="docs/img/0.2.33/08-build-options.png" alt="Build options" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>A group opened</b><br><sub>Every program says in a sentence what it is, and many have a screenshot.</sub></td>
     <td><b>Build options</b><br><sub>-O3, building everything from source, building the kernel for this computer: all off by default.</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/09-disk.png" alt="Disk" width="100%"></td>
-    <td width="50%"><img src="docs/img/0.2.33/10-installing.png" alt="Installing" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/09-disk.png"><img src="docs/img/0.2.33/09-disk.png" alt="Disk" width="100%"></a></td>
+    <td width="50%"><a href="docs/img/0.2.33/10-installing.png"><img src="docs/img/0.2.33/10-installing.png" alt="Installing" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Disk</b><br><sub>Erase the whole disk, or install next to what is already there; disks that are too small are greyed out.</sub></td>
     <td><b>Installing</b><br><sub>Sixteen phases with a progress bar and a live log (this is the simulated run).</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="docs/img/0.2.33/11-done.png" alt="Done" width="100%"></td>
+    <td width="50%"><a href="docs/img/0.2.33/11-done.png"><img src="docs/img/0.2.33/11-done.png" alt="Done" width="100%"></a></td>
   </tr>
   <tr>
     <td><b>Done</b><br><sub>Restart and the system is ready.</sub></td>
