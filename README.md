@@ -5,11 +5,24 @@ install from, the kernel, and the desktop setup the GUI image boots into.
 
 **[Changelog](CHANGELOG.md)** · **[Releases](https://github.com/tarilka0gg/simple-linux/releases)** · **[Installer source](https://github.com/tarilka0gg/gentoo-installer)** · **[Binary packages](https://github.com/tarilka0gg/simple-linux-binhost)**
 
-![The live session: the installer, in the colours of the wallpaper](docs/img/0.2.22/welcome.png)
+![The live session: the installer, in the colours of the wallpaper](docs/img/0.2.33/desktop.png)
 
 The installer and the scripts that build all of this live in
 [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) (GPL-2.0-or-later). This repository
 holds what comes out of that build, and the parts that are configuration rather than code.
+
+## The installer
+
+The graphical installer of the GUI image, page by page (screenshots of 0.2.33, taken in a virtual machine):
+
+| | | |
+|---|---|---|
+| ![Welcome](docs/img/0.2.33/01-welcome.png) | ![Keyboard layouts](docs/img/0.2.33/02-keyboard.png) | ![Time zone](docs/img/0.2.33/03-timezone.png) |
+| ![Desktop](docs/img/0.2.33/04-desktop.png) | ![Graphics driver](docs/img/0.2.33/05-graphics.png) | ![Software](docs/img/0.2.33/06-software.png) |
+| ![A software group opened: what each program is, with a screenshot](docs/img/0.2.33/07-software-expanded.png) | ![Build options](docs/img/0.2.33/08-build-options.png) | ![Disk](docs/img/0.2.33/09-disk.png) |
+| ![Installing](docs/img/0.2.33/10-installing.png) | ![Done](docs/img/0.2.33/11-done.png) | |
+
+Welcome, keyboard layouts, time zone, desktop, graphics driver, software (with a sentence and often a screenshot for every program), build options, disk, then the install itself. The installing and done screens are the installer's simulated run (`installer-gui --debug-progress`), not a real install.
 
 ## Why this instead of a plain Gentoo install
 
