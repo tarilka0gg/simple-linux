@@ -11,6 +11,16 @@ The installer and the scripts that build all of this live in
 [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer) (GPL-2.0-or-later). This repository
 holds what comes out of that build, and the parts that are configuration rather than code.
 
+## The live session
+
+What the GUI image boots into: niri with the Noctalia bar and dock (screenshots of 0.2.33, taken in a virtual machine).
+
+| | |
+|---|---|
+| ![The desktop: the bar, the dock and the wallpaper](docs/img/0.2.33/live-desktop.png) | ![The launcher: Install Simple Linux, Ghostty, Thunar, Zen Browser and more](docs/img/0.2.33/live-launcher.png) |
+| ![Ghostty with the fish prompt and fastfetch](docs/img/0.2.33/live-terminal.png) | ![Thunar and btop side by side in niri's columns](docs/img/0.2.33/live-windows.png) |
+| ![Zen Browser, ready, with DuckDuckGo](docs/img/0.2.33/live-browser.png) | |
+
 ## The installer
 
 The graphical installer of the GUI image, page by page (screenshots of 0.2.33, taken in a virtual machine):
