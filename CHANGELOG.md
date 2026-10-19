@@ -4,6 +4,12 @@ What changed in each Simple Linux release, newest first. The images, the install
 the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
 Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
+## 0.2.35
+
+A small release: the image now carries the shared language setting. The installer, the programs, the offline payload, the stage3 and the kernel files are those of 0.2.34.
+
+- **`/etc/simple-linux/locale.toml`** is in the image (`lang = "auto"`, `fallback = "en"`): the one place that sets the language of Simple Linux programs, read by [simple-locale](https://github.com/tarilka0gg/simple-locale) (ustan and Ring-2Zero already use it). `auto` follows the system locale, so nothing changes until you edit the file; `~/.config/simple-linux/locale.toml` and `SIMPLE_LANG=uk` override it per user and per run. The installer does not copy the file to the installed system yet, and no program in the image reads it yet except ustan if you add it.
+
 ## 0.2.34
 
 One change in the installer; the rest of the image is that of 0.2.33 (GUI 516 → 517 MiB). Checked in QEMU: the Software page was opened in the live session and a screenshot enlarged by a click.
