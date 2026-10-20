@@ -9,6 +9,15 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.36] - 2026-10-20
+
+Smaller images; the installer, the offline payload, the stage3 and the kernel files are those of 0.2.35. Sizes (0.2.35 → 0.2.36): GUI 516.5 → 487.7 MiB, minimal 363.1 → 347.5 MiB, GUI offline 1706.3 → 1677.5 MiB, minimal offline 1552.9 → 1537.3 MiB. Checked in QEMU, not on real hardware: all four images boot (the GUI ones on BIOS and UEFI, with the network blocked for the offline ones), no program or library of the live system has an unresolved library, and a full offline install from the GUI offline image (191 packages, no network) finished and the installed disk booted to a login.
+
+- **Left out of the live image:** the ffmpeg 7 compatibility libraries and the CUPS print server (nothing in the image used them) and libsmi's MIB files; 15 MiB less in the root image. `iso/slim-excludes.py --check` still proves that no program that stays needs a library that is cut.
+- **Intel microcode** blobs that several CPU signatures share are kept once in the early-microcode part of the initramfs, which the medium carries twice (12 MiB less in all).
+- **Fixed in the build:** the list of cut packages named files by their `usr/sbin/...` paths, which in the merged-usr tree really are in `usr/bin`, so a cut left stray files behind; the paths are resolved now.
+- **Known:** an install in a VM whose graphics card is a virtual 3D one (`virtio-vga` with GL) asks Mesa for `virgl`, which the binary host's Mesa lacks, so Portage tries to compile Mesa and LLVM: it takes very long online and cannot work offline. This is the case since 0.2.32; on a machine with a real graphics card, or a plain VGA in the VM, the offline install works.
+
 ## [0.2.35] - 2026-10-19
 
 A small release: the image now carries the shared language setting. The installer, the programs, the offline payload, the stage3 and the kernel files are those of 0.2.34.
