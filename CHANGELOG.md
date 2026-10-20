@@ -9,6 +9,14 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.38] - 2026-10-20
+
+Fixes installing in a VM with a virtual 3D graphics card; the stage3 and kernel files are those of 0.2.37. Sizes: GUI 487.7 MiB, minimal 347.5 MiB, GUI offline 1611.8 MiB, minimal offline 1471.7 MiB. Checked in QEMU, not on real hardware: all four images boot, and a full offline install from the GUI offline image in a VM with a `virtio-vga-gl` card (no network) finished, with Mesa taken from the binary host, and the installed disk booted to a login.
+
+- **Fixed:** the virtual-GPU profile asked for `VIDEO_CARDS="... virgl vmware qxl"`, which matched no binary Mesa, so Portage tried to compile Mesa and LLVM (very long online, impossible offline). It asks for `virgl` only, which the binary host has; a VMware or QXL adapter still adds its own driver by detection.
+- **Offline payload:** now carries the `virgl` build of Mesa, and keeps a package whose binary the Gentoo binary host dropped from its index (`btrfs-progs` was, which sent an offline install into compiling its dependencies); `make-offline.sh` takes `OFFLINE_PREV` for that.
+- **Known:** the generic kernels have no virtio disk driver, so a VM disk must be SATA or NVMe (a virtio disk panics at boot).
+
 ## [0.2.37] - 2026-10-20
 
 Smaller stage3 and offline images; the live images, the installer, the offline payload and the kernel files are those of 0.2.36. Stage3 239.9 → 173.1 MiB, GUI offline 1677.5 → 1610.7 MiB, minimal offline 1537.3 → 1470.6 MiB. Checked in QEMU, not on real hardware: the GUI, minimal and minimal offline images boot, and a full offline install from the GUI offline image (no network, plain VGA) finished and the installed disk booted to a login, with the trimmed files not coming back.
