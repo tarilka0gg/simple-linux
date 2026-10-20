@@ -131,16 +131,16 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 |---|---|---|
 | `simple-linux-minimal.iso` | 0.34 GB | text installer (TUI), rescue tools, firmware |
 | `simple-linux-gui.iso` | 0.48 GB | the same plus a niri + Noctalia desktop (floating bar, colours from the wallpaper), Zen (downloaded on first use), Thunar, GParted, Portage Store, tui-shim (file picker and launchers for terminal programs), PipeWire, with a graphical installer |
-| `simple-linux-gui-offline.iso` | 1.6 GB | the GUI image **with everything an install downloads** (stage3, kernels, packages, Portage tree, configs): installs with no network. Default software groups and open-source GPU drivers; Zen, the optional groups and NVIDIA's driver need a network afterwards. `linux-firmware` is cut down on this image (full set: `emerge -1 sys-kernel/linux-firmware` online) |
-| `simple-linux-minimal-offline.iso` | 1.4 GB | the same for the text installer |
-| `simple-linux-stage3-amd64-openrc.tar.xz` | 173 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
+| `simple-linux-gui-offline.iso` | 1.4 GB | the GUI image **with everything an install downloads** (stage3, kernels, packages, Portage tree, configs): installs with no network. Default software groups and open-source GPU drivers; Zen, the optional groups and NVIDIA's driver need a network afterwards. `linux-firmware` is cut down on this image (full set: `emerge -1 sys-kernel/linux-firmware` online) |
+| `simple-linux-minimal-offline.iso` | 1.3 GB | the same for the text installer |
+| `simple-linux-stage3-amd64-openrc.tar.xz` | 159 MB | the stage3 the installer unpacks. The images no longer contain it: the installer downloads this file from the latest release (needs network, which the install needs anyway), and checks it against the `.sha512` next to it |
 | `simple-linux-stage3-amd64-openrc.tar.xz.sha512` | 170 B | its SHA-512, read by the installer |
 | `simple-linux-kernel-7.1.8.vmlinuz` | 13 MB | the live kernel |
 | `simple-linux-kernel-7.1.8-modules.tar.xz` | 12 MB | its modules (`lib/modules/7.1.8-cachyos1`) |
-| `simple-linux-kernel-store.tar` | 248 MB | the per-hardware kernel store the installer picks from: 10 builds (generic x86-64 v2/v3 and Raptor Lake, by GPU vendor and laptop/desktop) with their modules, plus the `Packages` index |
+| `simple-linux-kernel-store.tar` | 109 MB | the kernels the offline images carry (and the installer picks from by hardware profile): 4 universal builds (generic x86-64 v2 and v3, laptop and desktop), each with every open GPU driver (Intel, AMD, nouveau) as a module, with their modules, plus the `Packages` index. The online installer has the larger set (CPU-tuned and per-GPU builds) in the [binhost repository](https://github.com/tarilka0gg/simple-linux-binhost) |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.38** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.39** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 

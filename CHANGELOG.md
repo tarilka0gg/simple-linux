@@ -9,6 +9,14 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.39] - 2026-10-21
+
+Smaller offline images: universal kernels and a leaner stage3. The live images (GUI, minimal) and the installer are those of 0.2.38. Sizes (0.2.38 → 0.2.39): GUI offline 1611.8 → 1459.4 MiB, minimal offline 1471.7 → 1319.2 MiB, stage3 173.1 → 159.2 MiB, kernel store 247.7 → 109.3 MiB. Checked in QEMU, not on real hardware: all four images boot, and a full offline install from the GUI offline image (virtio 3D card, no network) finished and the installed disk booted to a login with the five GPU drivers in its module tree. No kernel was tried on a real AMD or NVIDIA card.
+
+- **Universal kernels:** the kernel store carries 4 builds (x86-64 v2 and v3, laptop and desktop) instead of 10. Each is built with every open GPU driver as a module (`i915`, `xe`, `amdgpu`, `radeon`, `nouveau`), so one kernel serves any vendor and Mesa does the rest; the `none` kernels used to carry `i915` only. The CPU-tuned (Raptor Lake) and NVIDIA builds are not on the offline images (NVIDIA's driver needs a network anyway); the installer falls back to the generic kernel. The online installer keeps its own, larger set.
+- **Stage3** (`iso/trim-stage.sh`): also without `lto-dump`, CMake's `ctest`, `cpack` and `ccmake`, and the translations in gcc's and binutils' data directories; `INSTALL_MASK` keeps them out on update.
+- **Known:** a VM disk must be SATA or NVMe (the generic kernels have no virtio disk driver). The kernel-matrix repository's `gpu/none` fragment is the universal one now.
+
 ## [0.2.38] - 2026-10-20
 
 Fixes installing in a VM with a virtual 3D graphics card; the stage3 and kernel files are those of 0.2.37. Sizes: GUI 487.7 MiB, minimal 347.5 MiB, GUI offline 1611.8 MiB, minimal offline 1471.7 MiB. Checked in QEMU, not on real hardware: all four images boot, and a full offline install from the GUI offline image in a VM with a `virtio-vga-gl` card (no network) finished, with Mesa taken from the binary host, and the installed disk booted to a login.
