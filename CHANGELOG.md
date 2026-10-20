@@ -1,22 +1,27 @@
 # Changelog
 
-What changed in each Simple Linux release, newest first. The images, the installer and the configuration are versioned together;
-the installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer).
-Downloads and checksums are on the [Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
+All notable changes to Simple Linux, newest first. The images, the installer and the configuration are versioned together; the
+installer's own code history is in [gentoo-installer](https://github.com/tarilka0gg/gentoo-installer). The format follows
+[Keep a Changelog](https://keepachangelog.com/), with `## [version] - date` headings. Downloads and checksums are on the
+[Releases](https://github.com/tarilka0gg/simple-linux/releases) page.
 
-## 0.2.35
+## [Unreleased]
+
+Nothing yet.
+
+## [0.2.35] - 2026-10-19
 
 A small release: the image now carries the shared language setting. The installer, the programs, the offline payload, the stage3 and the kernel files are those of 0.2.34.
 
 - **`/etc/simple-linux/locale.toml`** is in the image (`lang = "auto"`, `fallback = "en"`): the one place that sets the language of Simple Linux programs, read by [simple-locale](https://github.com/tarilka0gg/simple-locale) (ustan and Ring-2Zero already use it). `auto` follows the system locale, so nothing changes until you edit the file; `~/.config/simple-linux/locale.toml` and `SIMPLE_LANG=uk` override it per user and per run. The installer does not copy the file to the installed system yet, and no program in the image reads it yet except ustan if you add it.
 
-## 0.2.34
+## [0.2.34] - 2026-10-19
 
 One change in the installer; the rest of the image is that of 0.2.33 (GUI 516 → 517 MiB). Checked in QEMU: the Software page was opened in the live session and a screenshot enlarged by a click.
 
 - **Click a program's screenshot on the Software page to see it full-size.** It opens at its own size in a window over the installer; Esc or a click on it closes it. The pointer turns into a zoom cursor over a picture.
 
-## 0.2.33
+## [0.2.33] - 2026-10-18
 
 More software to choose from in the installer, nothing else changes in the live system. Sizes (0.2.32 → 0.2.33): GUI 514 → 517 MiB, minimal 362 → 363 MiB, GUI offline 1704 → 1706 MiB, minimal offline 1552 → 1553 MiB. Checked in QEMU, not on real hardware: the GUI image booted and its Software page lists the new groups; the packages below were installed in a Gentoo chroot and started in the live GUI session. An install of the new groups with the installer itself was not run.
 
@@ -26,7 +31,7 @@ More software to choose from in the installer, nothing else changes in the live 
 - **Screenshots** for Telegram, GIMP, mpv, VLC, LibreOffice, PineconeMC and the ten Craft apps on the Software page (27 in all).
 - These groups are not on the offline images (they download); the binhost build leaves them out.
 
-## 0.2.32
+## [0.2.32] - not released on its own (shipped in 0.2.33)
 
 Sizes (0.2.31 → 0.2.32): GUI 513 → 514 MiB, minimal 361 → 362 MiB, GUI offline 1703 → 1704 MiB, minimal offline 1551 → 1552 MiB. Checked in QEMU, not on real hardware: the finished GUI ISO booted headless, SSH was tried against it (below), and its installer's Software page was opened in the live session and looked at. Headless installs of the minimal flavor and on legacy BIOS ran to the end; a UEFI install and a GUI-flavor install were not repeated with these final images.
 
@@ -37,7 +42,7 @@ Sizes (0.2.31 → 0.2.32): GUI 513 → 514 MiB, minimal 361 → 362 MiB, GUI off
 - **Fixed: installs on legacy BIOS (GPT disks)** failed for lack of a BIOS boot partition; the installer now makes a 1 MiB one at the end of the disk. Not covered: BIOS together with the "next to what is there" free-space placement, which makes no BIOS boot partition.
 - Known noise: the live console prints "user.tester failed to start"; AMD graphics without LLVM is still untested.
 
-## 0.2.31
+## [0.2.31] - 2026-10-18
 
 Smaller again; the installer, the offline payload, the stage3, the kernel files and the Zen profile are those of 0.2.30. Sizes (0.2.30 → 0.2.31): GUI 560 → 513 MiB, minimal 369 → 361 MiB, GUI offline 1750 → 1703 MiB, minimal offline 1558 → 1551 MiB. Checked in QEMU, not on real hardware: the minimal image booted with the tools below; a test image built from the same GUI tree was run on the virtual GPU (niri and Noctalia up, a wallpaper set, a terminal opened, the installer window shown). The finished GUI ISO itself was not booted.
 
@@ -46,13 +51,13 @@ Smaller again; the installer, the offline payload, the stage3, the kernel files 
 - **Noctalia's default wallpaper** (a 5 MiB PNG) is left out; the live image sets its own wallpaper at every start.
 - `iso/slim-excludes.py` refuses to build if a program that stays still needs a library it would drop, so a Mesa that still wanted LLVM cannot ship by accident.
 
-## 0.2.30
+## [0.2.30] - 2026-10-18
 
 Zen Browser in the live session comes ready; nothing else changes (the installer, the offline payload, the stage3, the kernel files and the image sizes are those of 0.2.29: GUI 560 MiB, minimal 369 MiB, GUI offline 1750 MiB, minimal offline 1558 MiB). The GUI tree these images are made from was started in QEMU and Zen was opened in it with the profile below (the finished GUI ISO itself was not booted); the minimal image was booted and runs as before.
 
 - **Zen Browser in the live session starts from a fresh, ready profile every time**: DuckDuckGo as the search engine; uBlock Origin, SponsorBlock, CanvasBlocker and LocalCDN installed from addons.mozilla.org; DNS over HTTPS (Quad9), HTTPS-only mode and tracking protection; settings that spend less RAM and CPU (no site isolation, two content processes, no disk cache, a 64 MB memory cache); and the author's Zen layout, tabs on the right and no compact mode, with the nine Zen mods Zen downloads itself from its mod store at the first start (Quietify, Left close button, No Top Sites, Floating Status Bar, Better CtrlTab Panel, Tidy Popup, Cleaned URL bar, NoHighlightSplit, Add new tab urlbar icon). Checked with the real Zen 1.23.3b in an isolated profile: the extensions install and run, the preferences and policies apply, the mods are downloaded and their style sheet is built, the profile is left alone while Zen runs and made new when it starts again. The welcome pages the extensions open on their first install are closed again, Zen's "What's new" notice is switched off, and the extension buttons sit in the extensions panel, not on the toolbar. Not checked inside a live image, nor how the layout sits with the live session's window rules (the niri rule keeps Zen maximized).
 
-## 0.2.29
+## [0.2.29] - 2026-10-17
 
 Smaller images again. Only what the live system carries changes; the installer, the offline payload, the stage3 and the kernel files are the ones of 0.2.28. Checked in QEMU, not on real hardware: the minimal image boots and runs git, tcpdump and the installer without the removed tools; the GUI image boots to the niri desktop (Noctalia bar and dock, a terminal, the installer window) on software rendering.
 
@@ -62,7 +67,7 @@ Smaller images again. Only what the live system carries changes; the installer, 
 - **No build or documentation tools on the medium:** Perl and every Perl script, autoconf, automake, libtool, bison, flex, m4, nasm, vala, sassc, the mail client, man-db, groff, texinfo, mandoc, lld and mesa_clc, plus fish's developer tools (`fish_indent`, `fish_key_reader`) and hwdata's MAC-vendor lists. `iso/slim-excludes.py` makes the list and refuses to build when a program that stays still needs a library it would drop (it found that ghostty needs glslang, so that stays).
 - Not checked: an install from these images, the offline images booting (only their size), and Perl-dependent scripts beyond the ones used in the checks.
 
-## 0.2.28
+## [0.2.28] - 2026-10-17
 
 Smaller images and the right name. The installer is rebuilt for the name change; the offline payload, the stage3 and the kernel files are the ones of 0.2.27. Checked in QEMU, not on real hardware: the minimal image boots to the installer and the shell, the GUI image boots to the desktop.
 
@@ -70,7 +75,7 @@ Smaller images and the right name. The installer is rebuilt for the name change;
 - **About 45 MB less in each image** (GUI 637 → 592 MiB, minimal 434 → 387 MiB, the offline ones shrink the same way). The live system no longer carries what it never uses: the compiler and binutils (the installer builds the kernel inside the *installed* system, which has its own), the GRUB files (the boot loader is Limine), and firmware for hardware no PC with a screen has (SDIO and SoC Wi-Fi boards, server NICs and storage adapters, TV and capture cards, ISA/PCMCIA-era devices, serial adapters, ADSL modems). `os-prober`, Python for `equery`, and the Wi-Fi, GPU, Bluetooth and audio firmware stay.
 - Not checked: an install from these images, and the GUI installer's pages after the size cuts.
 
-## 0.2.27
+## [0.2.27] - 2026-10-16
 
 A new installer in all four images (and the offline payload, the stage3 and the kernel files unchanged from 0.2.26). Everything below was checked in QEMU, not on real hardware; what was not checked is said in each item.
 
@@ -86,7 +91,7 @@ A new installer in all four images (and the offline payload, the stage3 and the 
 - **Fixes:** a resumed install uses the layout the first run made; the installed system is called `simple-linux`, not `gentoo`; the installer says "Simple Linux" instead of "Gentoo"; `simple-linux-update` keeps other
   systems' entries in `limine.conf` and leaves a kernel built on the machine alone; block devices of 0 B are not listed as disks.
 
-## 0.2.26
+## [0.2.26] - 2026-10-16
 
 A fix for the desktop of all four images; nothing else changed (the installer, the kernels and the stage3 are the 0.2.25 ones).
 
@@ -95,7 +100,7 @@ A fix for the desktop of all four images; nothing else changed (the installer, t
   `started` and `colors_changed` in the config whatever its source. Checked in a VM with the 0.2.25 image: after `noctalia msg wallpaper-random` with the hook line added, `palette.md` and micro's scheme were rewritten 0.4 s after the new
   ghostty theme (before, they kept the time of the first start). A micro that is already open keeps its colours until it is restarted.
 
-## 0.2.25
+## [0.2.25] - 2026-10-15
 
 Two new images, **`simple-linux-gui-offline.iso`** (1.8 GiB) and **`simple-linux-minimal-offline.iso`** (1.6 GiB), that install **without a network**. The other two images, the stage3 and the kernel files are as before
 (the installer in all four understands the offline medium).
@@ -112,7 +117,7 @@ Two new images, **`simple-linux-gui-offline.iso`** (1.8 GiB) and **`simple-linux
   and the installed system booted to a login. The minimal offline image boots, finds the payload and goes straight to the disk screen. **Not checked:** an install from the minimal offline image end to end, the graphical wizard on the offline image,
   real hardware, and the installed desktop on screen in a VM (no virtual GPU driver in the generic kernels, as before).
 
-## 0.2.24
+## [0.2.24] - 2026-10-14
 
 Checked in QEMU: the live session (terminal, launcher order and icons, micro with the picker badge, wallpaper colours) and a headless install of the GUI image on an NVMe disk (a generic kernel, packages from the binhost,
 nothing compiled) that booted to a login; there the copied `tui-shim`, its micro shim, the launcher entries and the palette were all in place. **Not checked:** the installed desktop on screen: the generic kernels have no
@@ -132,7 +137,7 @@ virtual GPU driver (as in 0.2.22 and 0.2.23), so niri starts but a VM shows only
 - **fastfetch:** a compact 13-row braille snake is used in terminals smaller than 100x32; the big one otherwise. The logo is no longer garbled when the terminal window is still being sized at start.
 - `grim` is in the installer's *Desktop utilities* group.
 
-## 0.2.23
+## [0.2.23] - 2026-10-13
 
 Checked in QEMU (the live session, a terminal opened after closing the installer).
 
@@ -142,7 +147,7 @@ Checked in QEMU (the live session, a terminal opened after closing the installer
   Noctalia's own fastfetch template, which recolours everything, is off).
 - **fastfetch in every terminal of the live image.** It runs at the first prompt and is cleared when the first command is typed, as in the author's own fish (`/etc/fish/conf.d/10-house.fish`).
 
-## 0.2.22
+## [0.2.22] - 2026-10-12
 
 Built and tested in QEMU:
 
@@ -184,103 +189,103 @@ the terminal, Thunar, fastfetch and the panel in the wallpaper's colours. The GU
 **Nothing has to be configured.** The kernels are the assets of the `kernels` release of [simple-linux-binhost](https://github.com/tarilka0gg/simple-linux-binhost) (ten builds and a `Packages` index), the packages and the Portage tree snapshot are there too, and the configs come from simple-linux-configs: all defaults of the installer (`GENTOO_STORE_BINHOST_URL` and the others only override them). A headless install from the released GUI image on an NVMe disk with only the disk and the user set took the kernel and packages from GitHub, compiled nothing, and the installed system booted to a login. **Not checked:** the graphical wizard end to end with these changes (the headless run uses the same phases, not the same
 screens), Secure Boot of the installed system under OVMF, any real hardware.
 
-## 0.2.21
+## [0.2.21] - 2026-10-08
 
 - **Launcher and dock.** The dock pins the Zen Browser entry that downloads the browser (not the empty `zen-zen-bin` one); Noctalia, Panel, About Xfce, the Thunar helpers and the console tools (btop, Micro) are hidden from the launcher. Application icons are glyph-style (symbolic) and Noctalia recolours them to the wallpaper palette; the full-colour icon sets only gave solid blobs when recoloured.
 - **Colours follow the wallpaper everywhere:** the focus ring and window borders of niri come from the same palette (`noctalia.kdl`). The random wallpaper is requested until Noctalia has really applied one (it could be missed at start). The deprecated `middle_click_opens_widget_settings` line, which showed a notification, is gone.
 - **Wallpapers:** 17 left (the Dragon Ball one and a 5120x1440 ultrawide are removed). Checked in QEMU only. The minimal image is unchanged.
 
-## 0.2.20
+## [0.2.20] - 2026-10-08
 
 - **A different wallpaper on every start, and the colours follow it.** The graphical session picks a random wallpaper from `~/Pictures/Wallpapers/simple` when it starts, and Noctalia generates the palette from it (Material You, `m3-tonal-spot`, light); GTK 3/4 apps and the installer use that palette. Replaces the fixed Gruvbox look of 0.2.19: the GTK theme is plain Adwaita, the niri borders are neutral.
 - **The installer has a launcher entry** (`Install Simple Linux`, with an icon), so the dock and launcher no longer show the raw app id. Icons are WhiteSur. Checked in QEMU only: the random pick itself was seen to run, a change of palette between starts was not looked at on screen. The minimal image is unchanged.
 
-## 0.2.19
+## [0.2.19] - 2026-10-08
 
 - **Gruvbox in the graphical image.** Noctalia uses its built-in Gruvbox palette (light), which also recolours GTK 3/4 apps, the installer, the terminal and btop; niri's focus ring and borders use Gruvbox colours. The GTK theme is Gruvbox-Light.
 - **WhiteSur icons.** The images only had Adwaita, so the installer and apps showed generic icons; the WhiteSur icon theme is now installed and set as the default (also through a GSettings default, since GTK 4 reads that before `settings.ini`). Application icons in the dock are no longer recoloured to one colour. Checked in QEMU (UEFI): the installer shows the Gruvbox colours and WhiteSur icons. The minimal image is unchanged.
 
-## 0.2.18
+## [0.2.18] - 2026-10-08
 
 - **Simple Linux wallpapers in the graphical image.** 19 wallpapers are in `~/Pictures/Wallpapers/simple` of the live session (`wallpapers/simple/` in this repo); the wallpaper picker (Ctrl+Alt+T) shows them in the `simple` folder. The minimal image is unchanged from 0.2.17.
 
-## 0.2.17
+## [0.2.17] - 2026-10-08
 
 - **ustan 0.2.2 is in both images** (it was a build from before 0.2.1): AppImages start without FUSE 2 and a launcher that dies right away shows its last output instead of failing silently.
 - **Ventoy normal mode finds the image by itself.** If no device carries the label `GENTOO_LIVE` (a bootloader that Ventoy chain-loads, a kernel that only sees the USB stick), the initramfs now mounts the drives read-only, looks for an `.iso` with that volume label (up to three directories deep) and attaches it as a loop device, saying so on the console instead of waiting silently. Nothing changes when the label is already there (a real CD, Ventoy's grub2 mode). `rd.iso.autoscan=0` turns it off. Checked in QEMU on a real Ventoy 1.1.17 exFAT stick image and with Ventoy's own menu in UEFI; not yet confirmed on the laptop that showed the stall.
 
-## 0.2.16
+## [0.2.16] - 2026-10-07
 
 - **The installer inside the images is the current one.** The 0.2.14 and 0.2.15 images were built from an older build of the graphical installer, without the later changes (the software step in the normal flow, working search in the keyboard and timezone lists, uniform icon badges). Nothing else differs from 0.2.15. Checked in QEMU: both images boot from Ventoy (BIOS and UEFI, normal mode) and written straight to a stick (BIOS, UEFI, Secure Boot).
 
-## 0.2.15
+## [0.2.15] - 2026-10-07
 
 - **Ventoy works in BIOS without choosing a mode.** The BIOS stage of Limine in the images is rebuilt with a one-line patch (`iso/patches/limine-12.3.3-ventoy-bios.patch` in gentoo-installer; `iso/build-limine-bios.sh` makes it): Ventoy's virtual CD is a 2048-byte-sector drive that is neither flagged removable nor ATAPI, so stock Limine skipped it and stopped with "Could not determine boot drive". The BIOS config also no longer pins file hashes (only Secure Boot on UEFI needs them), which fixes the `Blake2b hash … does not match` panic that one tester saw when starting the image from Ventoy on BIOS. Checked in QEMU with Ventoy 1.1.17: BIOS and UEFI, normal mode and grub2 mode, for both images; and written straight to a stick on BIOS, UEFI and Secure Boot.
 - **Zen Browser downloads in the background** as soon as the graphical session starts (no terminal window any more); opening it earlier just waits for the download.
 
-## 0.2.14
+## [0.2.14] - 2026-10-06
 
 - **portage-store is in the GUI image and in an installed desktop.** The installer copies it from the live system (programs under `/usr/local`, the helper in `/usr/libexec/portage-store/`). It adds one passwordless `doas` rule for the wheel group, limited to that helper: `permit nopass :wheel cmd /usr/libexec/portage-store/priv-helper`. `GENTOO_INSTALLER_STORE=0` skips the whole thing. The minimal image does not have it (no GTK).
 
-## 0.2.13
+## [0.2.13] - 2026-10-06
 
 - **The installed system matches the GUI image.** The default package groups now include everything the GUI live image has (file manager, audio, desktop utilities, disk tools, hardware tools, Gentoo tools). The browser group installs Zen, as the image does. Expect a much larger default install (about 186 packages, ~800 MB of downloads, some compiling); untick groups you do not want.
 - **`btop` instead of `htop`, and `fastfetch`,** in both images and in the installed system.
 
-## 0.2.12
+## [0.2.12] - 2026-10-06
 
 - **root has fish as its login shell** on the installed system (and, when the desktop presets are installed, the same fish setup as the user). The account is still locked: this is the shell for `su`, `doas -s` or a rescue login. Checked in a VM: `/etc/passwd` of the installed system has `root:…:/usr/bin/fish`.
 
-## 0.2.11
+## [0.2.11] - 2026-10-06
 
 - **Your fish is installed with the system.** The installer copies the author's fish setup (the tide prompt with his settings, fisher, sponge, autopair, `config.fish`) into the new user's `~/.config/fish` when the system has fish. The configs live in [simple-linux-configs](https://github.com/tarilka0gg/simple-linux-configs) (the repository that used to be `gentoo-wm-configs`; the old address redirects). The live image uses it by default, so a desktop install no longer needs `GENTOO_WM_CONFIGS_URL` to be set by hand.
 - tide draws its icons with a Nerd Font: use a terminal with one (the plain Linux console shows squares).
 
-## 0.2.10
+## [0.2.10] - 2026-10-06
 
 - **ustan is also installed on the system you install.** The installer copies it from the live image into `/usr/local` of the new system (the `ustan` command always; the window and its menu entry when a desktop was installed). Skip it with `GENTOO_INSTALLER_USTAN=0` in the headless mode. It is not part of Portage, so it is not updated with the system.
 
-## 0.2.9
+## [0.2.9] - 2026-10-06
 
 - **ustan is in the images.** [ustan](https://github.com/tarilka0gg/ustan) installs a .deb, an AppImage, a Flatpak bundle or a Windows .exe from a window (or `ustan install <file>`). The GUI image has `ustan-gui` with a menu entry, the minimal image the `ustan` command.
 
-## 0.2.8
+## [0.2.8] - 2026-10-06
 
 - **The graphical installer starts much sooner on machines without 3D** (old or unsupported GPUs, most VMs): ~9 s after the kernel starts instead of ~31 s (measured in QEMU). The live session used to wait a fixed 25 s for niri; it now checks for a 3D-capable GPU driver and goes straight to the software-rendered window when there is none. With a 3D GPU nothing changes except that it no longer waits.
 - The boot menu waits 3 s instead of 5.
 
-## 0.2.7
+## [0.2.7] - 2026-10-06
 
 - **Smaller again** (minimal 652 → 514 MiB, gui 880 → 734 MiB): the root image no longer holds a second copy of the initramfs and the microcode images; Intel microcode for the newest server-only CPUs (Granite/Sierra/Emerald Rapids, Grand Ridge) is gone (Sapphire Rapids and everything older stays; such a CPU still boots on the firmware's microcode); Python keeps only what `equery` needs.
 
-## 0.2.6
+## [0.2.6] - 2026-10-06
 
 - **EROFS instead of squashfs for the root image** (LZMA, 1 MiB clusters): about 120 MiB smaller. The live kernel has EROFS built in (the kernel file in this release replaces the earlier one). Boot is about 2 s slower to reach the services, measured in a VM.
 - **OpenRC starts services in parallel** (`rc_parallel`), which gives back about 1.5 s of that.
 
-## 0.2.5
+## [0.2.5] - 2026-10-06
 
 - **Smaller again** (minimal 851 → 747 MiB, gui 1227 → about 1000 MiB): Zen Browser and the NVIDIA GSP firmware are no longer on the medium.
 - **Zen is downloaded on first use.** The GUI image has a "Zen Browser" entry (and `get-zen`) that fetches the current release from Zen's GitHub page (~110 MB, HTTPS, no checksum is published there) and runs it. Without that firmware the live GUI on RTX 20xx and newer cards runs in software (the cage fallback); the installed system is not affected.
 
-## 0.2.4
+## [0.2.4] - 2026-10-06
 
 - **The stage3 is downloaded, not shipped** (minimal 1091 → 851 MiB, gui 1467 → 1227 MiB). The images set `GENTOO_INSTALLER_STAGE3_URL` to the latest release's stage3 and the installer verifies it against the `.sha512` published next to it. A full install in a VM did this, and the installed system had fish, eza and micro, no nano. For use without a network you need your own image: `STAGE_TARBALL=… iso/assemble-iso.sh` (see the installer repository).
 
-## 0.2.3
+## [0.2.3] - 2026-10-06
 
 - **Smaller:** the Rust and Zig toolchains that were only needed to build the image are no longer in it (minimal 1202 → 1091 MiB, gui 1634 → 1467 MiB, even with the additions below).
 - **More tools** (also in the GUI image), picked from the official Gentoo minimal CD's list: `gptfdisk` (gdisk/sgdisk), `iw` and `wpa_supplicant`, `nmap` (with ncat and nping) and `traceroute`, `eix` and `gentoolkit` (`equery`; Python is in the image for it), `screen`, and **Memtest86+** (two boot-menu entries, BIOS and UEFI; under Secure Boot the UEFI one is refused by the firmware since it is unsigned). The Portage tree is not on the medium, so `eix`/`equery` are only useful once you have one.
 
-## 0.2.2
+## [0.2.2] - 2026-10-05
 
 - **The installer now starts on older CPUs.** `installer-cli`/`installer-gui` were linked on a machine whose libc is built for x86-64-v3, so the binaries carried a "v3 needed" note and the live system refused to run them on anything older than Haswell (Westmere, Sandy/Ivy Bridge Xeons: "CPU ISA level is lower than required"). The images booted fine; only the installer did not start. Fixed, and checked in QEMU with Westmere, Sandy Bridge and a plain `qemu64` CPU, BIOS and UEFI, both images, 1 to 4 CPUs, 1 to 3 GB of RAM.
 
-## 0.2.1
+## [0.2.1] - 2026-10-05
 
 - The images carry a `boot/grub/grub.cfg`, which is what makes them bootable from Ventoy (see above).
 
-## 0.2.0
+## [0.2.0] - 2026-10-05
 
 - **One install path.** The text and graphical installers run the same phase pipeline as `--headless`, and a failed install can be **resumed** (`r` in the text installer, a button in the GUI, `--resume`): done steps are skipped, the rest continue. The VM test of this found that the base-system step could not run twice (it now remembers an unpacked stage and re-fetches the overlay); fixed.
 - **Graphics.** Every graphics adapter is detected, `VIDEO_CARDS` covers all of them (hybrid laptops used to get only the discrete GPU's driver; the values are now Gentoo's: `amdgpu radeonsi`, `intel`, `nvidia`, `virgl` in a VM), and the compositor renders on the discrete GPU unless asked otherwise (`GENTOO_INSTALLER_RENDER=integrated`): niri's `render-drm-device`, `WLR_DRM_DEVICES`/`AQ_DRM_DEVICES` for the others, and Noctalia's shared GL context is switched off for the proprietary NVIDIA driver.
@@ -289,7 +294,7 @@ screens), Secure Boot of the installed system under OVMF, any real hardware.
 - **Images** are about 8 % smaller (squashfs zstd level 19, 1 MiB blocks); both were booted as a USB stick on BIOS, UEFI and Secure Boot. The GUI image without 3D falls back to a cage-hosted graphical installer, or the text one.
 - **Signing**: signed checksums and Secure Boot as above. `GENTOO_INSTALLER_WM=none` installs no desktop.
 
-## 0.1.2 (installer)
+## [0.1.2] - 2026-10-05 (installer)
 
 A full install through the text installer was run in a VM for the first time (network → disk → account → confirm, with the
 desktop and the Wi-Fi group), rebooted, and the installed disk booted and logged in. That found and fixed: the text installer had

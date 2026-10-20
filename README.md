@@ -1,5 +1,7 @@
 # Simple Linux
 
+[![License](https://img.shields.io/github/license/tarilka0gg/simple-linux)](LICENSE) [![Release](https://img.shields.io/github/v/release/tarilka0gg/simple-linux)](https://github.com/tarilka0gg/simple-linux/releases) [![Changelog](https://img.shields.io/badge/changelog-CHANGELOG.md-blue)](CHANGELOG.md)
+
 A small Gentoo-based live system with its own installer. Two bootable images, the stage3 they
 install from, the kernel, and the desktop setup the GUI image boots into.
 
@@ -233,7 +235,7 @@ machine) was checked in a VM only, headless.
 
 **Real hardware:** boots and installs on the author's machine; nothing is known about others. Also not done or not confirmed: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build, but a working one.
 
-## Licence
+## License
 
 See [NOTICE.md](NOTICE.md). The files in this repository (configuration and documentation) are
 GPL-2.0-or-later, like the installer; the images contain many packages under their own licences.
