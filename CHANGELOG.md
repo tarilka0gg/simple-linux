@@ -9,6 +9,13 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.37] - 2026-10-20
+
+Smaller stage3 and offline images; the live images, the installer, the offline payload and the kernel files are those of 0.2.36. Stage3 239.9 → 173.1 MiB, GUI offline 1677.5 → 1610.7 MiB, minimal offline 1537.3 → 1470.6 MiB. Checked in QEMU, not on real hardware: the GUI, minimal and minimal offline images boot, and a full offline install from the GUI offline image (no network, plain VGA) finished and the installed disk booted to a login, with the trimmed files not coming back.
+
+- **Stage3 trimmed** (`iso/trim-stage.sh`, run by `make-stage.sh`): the DocBook stylesheets, package docs, info pages, translations other than English and Ukrainian, the Fortran compiler and Python's compiled caches are not in it any more. Man pages, `locale-gen`'s data, the 32-bit gcc libraries and the rest of the toolchain stay.
+- **`INSTALL_MASK`** in the stage's `make.conf` keeps those files from coming back with `emerge -u`; delete the line to get them. The installer's `make.conf` rewrite leaves it alone (checked on an install).
+
 ## [0.2.36] - 2026-10-20
 
 Smaller images; the installer, the offline payload, the stage3 and the kernel files are those of 0.2.35. Sizes (0.2.35 → 0.2.36): GUI 516.5 → 487.7 MiB, minimal 363.1 → 347.5 MiB, GUI offline 1706.3 → 1677.5 MiB, minimal offline 1552.9 → 1537.3 MiB. Checked in QEMU, not on real hardware: all four images boot (the GUI ones on BIOS and UEFI, with the network blocked for the offline ones), no program or library of the live system has an unresolved library, and a full offline install from the GUI offline image (191 packages, no network) finished and the installed disk booted to a login.
