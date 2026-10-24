@@ -119,7 +119,7 @@ and overlays stay available) and removes the first day:
 - **You can see and check it.** The images are signed (`SHA256SUMS.sig`), Secure Boot capable, and this repository is the configuration, not a blob.
 
 What it is not: not a binary distribution with its own repository of everything (anything outside Gentoo's binhost and this project's compiles on your machine),
-no disk encryption yet, no Microsoft-signed Secure Boot (an installed system can sign its own bootloader with a key made on that machine, see below), and still young: it **boots and installs on the author's real hardware**, but only a few machines have seen it (see below). If you want a distro that is
+no disk encryption yet, no Microsoft-signed Secure Boot (an installed system can sign its own bootloader with a key made on that machine, see below), and still young: it **boots and installs on real computers** (the author's laptop and a second Intel + NVIDIA laptop next to Windows), but only a few machines have seen it (see below). If you want a distro that is
 finished and supported today, use one; if you want Gentoo without the first day, try this and report what happens.
 
 ## Downloads
@@ -195,7 +195,7 @@ Limine shows a menu for 3 seconds (Ventoy's GRUB mode: 5). Try the entries in th
 `[Firmware Bug]: TSC_DEADLINE disabled ... please update microcode` and `error -71` on some USB port are
 warnings on their own; if boot stops, the lines *after* them (use entry 4) say why. Early versions had a
 console setting that hid those lines on laptops with a phantom serial port; that is fixed and CPU
-microcode now loads early. The images **boot and install on the author's real hardware**; other machines are untested, so reports of what the verbose
+microcode now loads early. The images **boot and install on real computers** (the author's laptop and a second Intel + NVIDIA laptop next to Windows); other machines are untested, so reports of what the verbose
 entry prints on a failing machine are the most useful thing you can send.
 
 ## What is in the images
@@ -233,7 +233,7 @@ images, a full install of the GUI offline image with the outside network blocked
 Work for the next release (see the *Unreleased* section of [CHANGELOG.md](CHANGELOG.md): install next to other systems, several keyboard layouts, time zone search, an optional kernel built on the
 machine) was checked in a VM only, headless.
 
-**Real hardware:** boots and installs on the author's machine; nothing is known about others. Also not done or not confirmed: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build, but a working one.
+**Real hardware:** installed and booted on two real computers: the author's laptop, and an Intel Core i9-14900HX laptop with an NVIDIA GPU, installed from the GUI image next to Windows (the existing EFI partition was reused, Limine boots both). The second install needed hand fixes (the kernel's `objtool` did not match the installed binutils for the NVIDIA module, `iwd` did not start for want of kernel options, and the bootloader step stopped with "File exists" on the shared EFI partition); 0.2.40 has those fixes, and they have not been run on that laptop again. Nothing is known about other machines. Also not done or not confirmed: the desktop and GPU-driver steps on a real target (a compile of niri and Noctalia was not part of the test), the Wi-Fi screen against a real `iwd`, LUKS in the installer, Secure Boot for the installed system. Treat it as an early build, but a working one.
 
 ## License
 
