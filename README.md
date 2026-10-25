@@ -140,7 +140,7 @@ Everything large is attached to the **Releases** page (GitHub will not take file
 | `simple-linux-kernel-store.tar` | 109 MB | the kernels the offline images carry (and the installer picks from by hardware profile): 4 universal builds (generic x86-64 v2 and v3, laptop and desktop), each with every open GPU driver (Intel, AMD, nouveau) as a module, with their modules, plus the `Packages` index. The online installer has the larger set (CPU-tuned and per-GPU builds) in the [binhost repository](https://github.com/tarilka0gg/simple-linux-binhost) |
 | `SHA256SUMS`, `SHA256SUMS.sig` | | checksums and their signature (see below) |
 
-Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.40** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
+Both ISOs boot on BIOS and UEFI (Limine). Current version: **0.2.41** (what changed: [CHANGELOG.md](CHANGELOG.md)). Versions before 0.1.2 are withdrawn: they did not boot on the first laptop they were tried on.
 
 ### Verifying the download
 

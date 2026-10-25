@@ -9,6 +9,12 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.41] - 2026-10-25
+
+The images are those of 0.2.40 (same sizes, kernels and packages) with a clearer user name on the account page.
+
+- **User name:** the graphical installer says under the field which characters are allowed (English small letters, digits, `-` and `_`, starting with a letter) and names the problem while the name is typed: capital letters, spaces, other symbols or letters, a digit or `-` at the start, more than 32 characters. The text installer gives the same wording. Before, a name with a capital letter was accepted on the page and the install failed at the account step a quarter of the way in. Checked by the tests only; the new page was not looked at on a screen.
+
 ## [0.2.40] - 2026-10-25
 
 Gaming, Bluetooth and the first fixes from a real dual-boot install. Sizes (0.2.39 → 0.2.40): GUI offline 1459.4 → 1517.5 MiB, minimal offline 1319.2 → 1377.4 MiB (the Vulkan Mesa and BlueZ are on them now); GUI 487.7 and minimal 347.5 MiB are unchanged in size. Checked in QEMU: a headless install from the online GUI image with the default groups plus Steam and Gaming, one with the default groups, and one from the offline GUI image with the network blocked. All three finished with binary packages only (nothing was compiled; `steam-launcher`, `zen-bin` and `linux-firmware` are prebuilt files that are installed as they are), and the installed disks boot with iwd, Bluetooth and D-Bus started. Before this release the GUI image was installed on two real laptops (one Intel + NVIDIA next to Windows, where the problems fixed below were found). Not tried: Steam running, a game, real Wi-Fi or Bluetooth after the new kernels, the NVIDIA module with the new kernel tree, the graphical screens in a VM (only the headless installer was run there).
