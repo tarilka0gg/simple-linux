@@ -9,6 +9,36 @@ installer's own code history is in [gentoo-installer](https://github.com/tarilka
 
 Nothing yet.
 
+## [0.2.46] - 2026-10-28
+
+Smaller live images, a faster install, and everything that was built since 0.2.41 (0.2.42 to 0.2.45 were never published). Sizes
+(0.2.41 → 0.2.46): minimal 347 → 320 MiB, GUI 487 → 459 MiB; offline images grew, minimal 1377 → 1790 MiB and GUI 1517 → 1929 MiB (the
+default desktop is now one archive on them, see below).
+
+- **BusyBox in the live images:** BusyBox 1.36.1 (static, musl, 242 KiB) replaces 83 of the 102 GNU coreutils programs in the live
+  system; the 19 it has no applet for (`b2sum`, which the Secure Boot step uses, `od`, `fold`, `stdbuf`, ...) stay GNU. The installed system
+  is not affected. Both ISOs are about 1.5 MiB smaller for it.
+- **Less firmware in the live images:** firmware that the live kernel's own drivers never ask for is left out (GPU, Realtek, Atheros and
+  MediaTek Wi-Fi families only; Intel Wi-Fi, whose driver does not list all its files, is left alone). About 27 MB off each ISO. The
+  installed system gets the full `linux-firmware` from its stage3 as before. Not yet tried on real hardware.
+- **Faster online install:** nine more packages are on the binary host (`libX11`, `libXi`, `libXrender`, `libXtst`, `wayland`,
+  `wayland-scanner`, `libevdev`, `btrfs-progs`, `compose-tables`), so the install no longer compiles them. Measured in a QEMU VM (8
+  vCPUs, KVM) with the minimal ISO: 749 s → 642 s, the software step 11 min 38 s → 9 min 58 s. Settings that make Portage merge in
+  parallel (`parallel-install`, `parallel-fetch`) were tried and changed nothing: the time goes on per-package merge work, one package at a time.
+- **Default desktop from one archive:** the offline images carry the default desktop as a single archive that the installer unpacks
+  instead of merging about 280 packages one by one. Measured offline (no network, minimal offline ISO, same VM): the whole install takes
+  52 s. The online install still merges package by package; the archive is not on the binary host yet.
+- **homectl** is installed by default on the desktop (`homectl-bin` 0.20.0: live webcam, Wake up, performance profile).
+- **Installer:** the user name page says which characters are allowed while you type; when NVIDIA's driver cannot be built the install falls
+  back to the open Nouveau driver instead of stopping; the offline Software page has the same groups as the online one (what is not on
+  the medium is shown unticked, with a note); the log shows the time of every step and the install runs up to 8 package jobs at once (half
+  the cores) instead of 4; the desktop packages join the software transaction.
+- **Fixed:** the per-user OpenRC session failed at every login and is no longer in the login stack.
+- **Tested:** minimal ISO online install and boot (QEMU, UEFI): installs, boots, services start. Minimal offline ISO with outbound network
+  blocked: installs in 52 s and boots. The GUI and GUI offline images were built but their installs were not run again for this release.
+- **Known:** in a headless run `installer-cli` prints "INSTALL COMPLETE" but the process does not exit by itself. The console login
+  prompt still reprints about once a second.
+
 ## [0.2.41] - 2026-10-25
 
 The images are those of 0.2.40 (same sizes, kernels and packages) with a clearer user name on the account page.
